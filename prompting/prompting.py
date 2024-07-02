@@ -32,7 +32,7 @@ config_data = json.load(open('config.json'))
 os.environ['HF_TOKEN'] = config_data["HF_TOKEN"]
 os.environ['HF_HOME'] = HF_HOME
 
-def load_model(model: str):
+def load_model(model):
     torch.cuda.memory_summary(device=None, abbreviated=False)
     model = LLM(
         model,
