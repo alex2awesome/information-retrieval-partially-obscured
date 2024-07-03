@@ -1,12 +1,14 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --time=1:00:00
-#SBATCH --gres=gpu:a100:4
-#SBATCH --mem-per-gpu=10GB
-#SBATCH --cpus-per-gpu=20
+#SBATCH --time=2:00:00
+#SBATCH --gres=gpu:1
+#SBATCH --mem=16GB
+#SBATCH --cpus-per-task=2
 #SBATCH --partition=gpu
 
-module load python/3.11
-pip install -r requirements.txt
-python3 data_vllm_70b.py
+export HF_HOME="/project/jonmay_231/spangher/huggingface_cache"
+export HF_DATASETS_CACHE="/project/jonmay_231/spangher/huggingface_cache"
+
+# Run the Python script
+python /project/jonmay_231/spangher/Projects/information-retrieval-partially-obscured/information-retrieval-partially-obscured/prompting/obscure_sources.py

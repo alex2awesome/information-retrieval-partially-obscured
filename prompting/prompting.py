@@ -1,112 +1,94 @@
-import pandas as pd
-import numpy as np
-from tqdm.auto import tqdm
-
-from vllm import LLM,  SamplingParams
-from transformers import AutoTokenizer
-import os
-
 import json
-import torch
+import os
 import logging
+import sys
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
-import argparse
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-
-
-
-
-logging.basicConfig(
-    format="%(asctime)s - %(levelname)s - %(lineno)d - %(message)s",
-    datefmt="%m/%d/%Y %H:%M:%S",
-    level=logging.INFO,
-)
-
+# Log system information
+logging.info(f"Python version: {sys.version}")
+logging.info(f"Current working directory: {os.getcwd()}")
+logging.info(f"PyTorch version: {torch.__version__}")
+logging.info(f"CUDA available: {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    logging.info(f"CUDA device: {torch.cuda.get_device_name(0)}")
 
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
-config_data = json.load(open('config.json'))
-os.environ['HF_TOKEN'] = config_data["HF_TOKEN"]
 os.environ['HF_HOME'] = HF_HOME
 
-def load_model(model):
-    torch.cuda.memory_summary(device=None, abbreviated=False)
-    model = LLM(
-        model,
-        dtype=torch.float16,
-        tensor_parallel_size=torch.cuda.device_count(),
-        download_dir=HF_HOME, # sometimes the distributed model doesn't pay attention to the 
-        enforce_eager=True
-    )
-    return model
+def load_model(model_name: str):
+    logging.info(f"Attempting to load model: {model_name}")
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, device=0 if torch.cuda.is_available() else -1)
+        logging.info("Model loaded successfully")
+        return classifier
+    except Exception as e:
+        logging.error(f"Failed to load model: {str(e)}")
+        raise
 
+def process_entry(entry, classifier):
+    url, content = entry.split('{', 1)
+    content = '{' + content.strip()
+    
+    try:
+        source_data = json.loads(content)
+    except json.JSONDecodeError:
+        logging.error(f"Failed to parse JSON for URL: {url}")
+        logging.error(f"Problematic content: {content}")
+        return None
 
-def infer(model, messages):
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-70B-Instruct")
-    formatted_prompt =  tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    output = model.generate(formatted_prompt, sampling_params)
+    obscured_sources = {}
+    for source, info in source_data.items():
+        prompt = f"Task: For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical contextless description about who/what the source is. Format: INPUT: Source name + what the source is + what information the source provides. OUTPUT: Source name + what the source is. Example: INPUT: The Biden Administration provided information on its efforts to improve access to mental health resources in schools, including a nearly $300 million allotment to expand access to mental health care. OUTPUT: The Biden Administration is the executive branch of the U.S. federal government under the leadership of President Joe Biden. If there is no information in the original entry on what the source is, only include the source name and nothing else. However, if you are 100% certain that you can infer what the source is without hallucinating, include that. Execute this task on the entry below. Only include one output line, include nothing except what comes after 'OUTPUT' (excluding the word 'OUTPUT'): INPUT: {source}: {info}"
+        
+        # Use the classifier to generate a response
+        result = classifier(prompt, max_length=100, num_return_sequences=1)[0]
+        obscured_info = result['generated_text'].strip()
+        
+        # Ensure the output starts with the source name
+        if not obscured_info.startswith(source):
+            obscured_info = f"{source}: {obscured_info}"
+        
+        obscured_sources[source] = obscured_info
 
-    return output[0].outputs[0].text
+    return url, obscured_sources
 
+def main():
+    logging.info("Starting main function")
+    try:
+        classifier = load_model("distilbert-base-uncased-finetuned-sst-2-english")
+
+        input_file = 'sources_data_70b__200000_200100.txt'
+        output_file = 'obscured_sources_output.txt'
+
+        logging.info(f"Input file: {input_file}")
+        logging.info(f"Output file: {output_file}")
+
+        with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+            current_entry = ""
+            for line in infile:
+                if line.strip() == '}':
+                    current_entry += line
+                    result = process_entry(current_entry, classifier)
+                    if result:
+                        url, obscured_sources = result
+                        outfile.write(f"{url}\n")
+                        outfile.write("{\n")
+                        for source, obscured in obscured_sources.items():
+                            outfile.write(f'"{source}": "{obscured}",\n')
+                        outfile.write("}\n\n")
+                    current_entry = ""
+                else:
+                    current_entry += line
+
+        logging.info("Processing complete")
+    except Exception as e:
+        logging.error(f"An error occurred in main: {str(e)}")
 
 if __name__ == "__main__":
-    
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--model", type=str, default="meta-llama/Meta-Llama-3-70B-Instruct")
-    parser.add_argument('--data_dir', type=str, default='./data')
-    # parser.add_argument('--start_idx', type=int, default=None)
-    # parser.add_argument('--end_idx', type=int, default=None)
-    args = parser.parse_args()
-
-
-
-
-    sources_path = '../conditional_information_retrieval/sources_data_70b__200000_200100.txt'
-    with open(sources_path, 'r') as f:
-        sources = f.read()
-        print('sources:', sources)
-
-
-    system_prefix = '''
-    For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical description.
-
-    Format:
-    1. **Original**: Identity information + Biographical information + Given information
-    2. **Obscured**: Identity information + Biographical information
-
-    Here're some examples:
-    1. **Socrata Foundation:** The Socrata Foundation provides information about its philanthropic philosophy and mandate to support unique organizations that lack resources or financial means to fulfill their data-driven mission. It also explains how it will proactively support open data efforts that deliver social impact and long-term value.
-    **Socrata Foundation:** The Socrata Foundation supports organizations lacking resources or financial means.
-
-    2. **Robert Runge:** Robert Runge, a member of the Socrata Board of Directors, provides additional context on the role of the Socrata Foundation in bridging the gap between publicly funded open data projects and underfunded or unfunded opportunities.
-    **Robert Runge:** Robert Runge, a board member of the Socrata Foundation.
-
-    It's important to return the obscured text only.
-    Here's the text:
-    {source}
-    '''
-
-    prompt = system_prefix.format(sources=sources)
-    print('prompt:\n', prompt)
-    message = [
-            {
-                "role": "system",
-                "content": "You are an experienced journalist.",
-            },
-
-            {
-                "role": "user",
-                "content": prompt
-            },
-        ]
-
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
-    formatted_prompt = tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
-
-    model = load_model(args.model)
-    sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    output = model.generate(message, sampling_params)
-
-    fname = 'sources_data_70b__200000_200100_obscured.txt'
-    with open(fname, 'w') as f:
-        f.write(output)
+    main()
