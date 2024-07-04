@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     model = load_model(args.model)
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    outputs = model.generate(message, sampling_params)
+    outputs = model.generate([message], sampling_params)
 
     for output in outputs:
         content = output.outputs[0].text
