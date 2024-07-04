@@ -1,10 +1,11 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --time=2:00:00
-#SBATCH --gres=gpu:1
-#SBATCH --mem=16GB
-#SBATCH --cpus-per-task=2
+#SBATCH --time=40:00:00
+#SBATCH --gres=gpu:a100:2
+#SBATCH --constraint=a100-80gb
+#SBATCH --cpus-per-gpu=10
+#SBATCH --mem=100G
 #SBATCH --partition=gpu
 
 export HF_HOME="/project/jonmay_231/spangher/huggingface_cache"
