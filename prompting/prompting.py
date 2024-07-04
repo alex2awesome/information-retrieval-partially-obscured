@@ -105,6 +105,9 @@ if __name__ == "__main__":
     model = load_model(args.model)
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
     outputs = model.generate([message], sampling_params)
+    fname = 'sources_data_70b__200000_200100_obscured.txt'
+    with open(fname, 'w') as f:
+        f.write("wtf?????")
 
     for output in outputs:
         content = output.outputs[0].text
