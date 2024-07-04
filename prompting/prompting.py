@@ -68,15 +68,15 @@ if __name__ == "__main__":
     For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical description.
 
     Format:
-    1. **Original**: Identity information + Biographical information + Given information
-    2. **Obscured**: Identity information + Biographical information
+    1. Original: Identity information + Biographical information + Given information
+    2. Obscured: Identity information + Biographical information
 
     Here're some examples:
-    1. **Socrata Foundation:** The Socrata Foundation provides information about its philanthropic philosophy and mandate to support unique organizations that lack resources or financial means to fulfill their data-driven mission. It also explains how it will proactively support open data efforts that deliver social impact and long-term value.
-    **Socrata Foundation:** The Socrata Foundation supports organizations lacking resources or financial means.
+    1. Socrata Foundation: The Socrata Foundation provides information about its philanthropic philosophy and mandate to support unique organizations that lack resources or financial means to fulfill their data-driven mission. It also explains how it will proactively support open data efforts that deliver social impact and long-term value.
+    Socrata Foundation: The Socrata Foundation supports organizations lacking resources or financial means.
 
-    2. **Robert Runge:** Robert Runge, a member of the Socrata Board of Directors, provides additional context on the role of the Socrata Foundation in bridging the gap between publicly funded open data projects and underfunded or unfunded opportunities.
-    **Robert Runge:** Robert Runge, a board member of the Socrata Foundation.
+    2. Robert Runge: Robert Runge, a member of the Socrata Board of Directors, provides additional context on the role of the Socrata Foundation in bridging the gap between publicly funded open data projects and underfunded or unfunded opportunities.
+    Robert Runge:** Robert Runge, a board member of the Socrata Foundation.
 
     It's important to return the obscured text only.
     Here's the text:
@@ -109,3 +109,4 @@ if __name__ == "__main__":
     fname = 'sources_data_70b__200000_200100_obscured.txt'
     with open(fname, 'w') as f:
         f.write(output)
+    print("DONE!!!!!!!!!!!!")
