@@ -8,8 +8,6 @@
 #SBATCH --mem=100G
 #SBATCH --partition=gpu
 
-export HF_HOME="/project/jonmay_231/spangher/huggingface_cache"
-export HF_DATASETS_CACHE="/project/jonmay_231/spangher/huggingface_cache"
-
-# Run the Python script
-python /project/jonmay_231/spangher/Projects/information-retrieval-partially-obscured/information-retrieval-partially-obscured/prompting/obscure_sources.py
+module load python/3.11
+pip install -r requirements.txt
+python3 prompting.py
