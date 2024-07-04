@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 
 
-    sources_path = '../conditional_information_retrieval/sources_data_70b__200000_200100.txt'
+    sources_path = 'sources_data_70b__200000_200100.txt'
     with open(sources_path, 'r') as f:
         sources = f.read()
         print('sources:', sources)
