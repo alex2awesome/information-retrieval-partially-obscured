@@ -56,10 +56,11 @@ if __name__ == "__main__":
 
 
     sources_path = 'sources_data_70b__200000_200100.txt'
-    with open(sources_path, 'r') as f:
-        sources = f.read()
-        print('sources:', sources)
+    # with open(sources_path, 'r') as f:
+    #     sources = f.read()
+    #     print('sources:', sources)
 
+    sources = '''Tripulantes (Flight Attendants): "The source \"tripulantes\" refers to flight attendants. They provide information about their concerns and practices during the pandemic, such as leaving food trays on an intermediate seat between them and the passenger, and wanting concrete measures to avoid contagion.'''
 
     system_prefix = '''
     For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical description.
@@ -80,8 +81,10 @@ if __name__ == "__main__":
     {source}
     '''
 
+
+
     prompt = system_prefix.format(sources=sources)
-    print('prompt:\n', prompt)
+    # print('prompt:\n', prompt)
     message = [
             {
                 "role": "system",
