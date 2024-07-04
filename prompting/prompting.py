@@ -18,7 +18,9 @@ logging.basicConfig(
 
 
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
-config_data = json.load(open('config.json'))
+with open('config.json', 'r') as f:
+    config_data = json.load(f)
+# config_data = json.load(open('config.json'))
 os.environ['HF_TOKEN'] = config_data["HF_TOKEN"]
 os.environ['HF_HOME'] = HF_HOME
 
