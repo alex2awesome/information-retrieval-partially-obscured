@@ -1,5 +1,3 @@
-import pandas as pd
-import numpy as np
 
 from vllm import LLM,  SamplingParams
 from transformers import AutoTokenizer
