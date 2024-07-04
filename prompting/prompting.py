@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
 
 
-    prompt = system_prefix.format(sources=sources)
+    prompt = system_prefix.format(source=sources)
     # print('prompt:\n', prompt)
     message = [
             {
