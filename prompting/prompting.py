@@ -62,21 +62,21 @@ if __name__ == "__main__":
     #     sources = f.read()
     #     print('sources:', sources)
 
-    sources = '''Tripulantes (Flight Attendants): "The source \"tripulantes\" refers to flight attendants. They provide information about their concerns and practices during the pandemic, such as leaving food trays on an intermediate seat between them and the passenger, and wanting concrete measures to avoid contagion.'''
+    sources = '''The source tripulantes refers to flight attendants. They provide information about their concerns and practices during the pandemic, such as leaving food trays on an intermediate seat between them and the passenger, and wanting concrete measures to avoid contagion.'''
 
     system_prefix = '''
-    For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical description.
+    For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical contextless description about who/what the source is.
 
     Format:
-    1. Original: Identity information + Biographical information + Given information
-    2. Obscured: Identity information + Biographical information
+    INPUT: Identity information + Biographical information + Given information
+    OUTPUT: Identity information + Biographical information
 
-    Here're some examples:
-    1. Socrata Foundation: The Socrata Foundation provides information about its philanthropic philosophy and mandate to support unique organizations that lack resources or financial means to fulfill their data-driven mission. It also explains how it will proactively support open data efforts that deliver social impact and long-term value.
-    Socrata Foundation: The Socrata Foundation supports organizations lacking resources or financial means.
+    Example:
+    INPUT: The Biden Administration provided information on its efforts to improve access to mental health resources in schools, including a nearly $300 million allotment to expand access to mental health care.
+    OUTPUT: The Biden Administration is the executive branch of the U.S. federal government under the leadership of President Joe Biden.
 
-    2. Robert Runge: Robert Runge, a member of the Socrata Board of Directors, provides additional context on the role of the Socrata Foundation in bridging the gap between publicly funded open data projects and underfunded or unfunded opportunities.
-    Robert Runge:** Robert Runge, a board member of the Socrata Foundation.
+    If there is no information in the original entry on what the source is, only include the source name and nothing else. However, if you are fully certain that you can infer what the source is without hallucinating, include that.
+    Execute this task on all entries below. Only include one output line for each entry, include nothing except what comes after "OUTPUT" (excluding the word"OUTPUT"):
 
     It's important to return the obscured text only.
     Here's the text:
@@ -104,9 +104,14 @@ if __name__ == "__main__":
 
     model = load_model(args.model)
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    output = model.generate(message, sampling_params)
+    outputs = model.generate(message, sampling_params)
 
-    fname = 'sources_data_70b__200000_200100_obscured.txt'
-    with open(fname, 'w') as f:
-        f.write(output)
+    for output in outputs:
+        content = output.outputs[0].text
+        fname = 'sources_data_70b__200000_200100_obscured.txt'
+        with open(fname, 'w') as f:
+            f.write("wtf?????")
+            f.write(content)
+
+    
     print("DONE!!!!!!!!!!!!")
