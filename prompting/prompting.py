@@ -2,6 +2,7 @@
 from vllm import LLM,  SamplingParams
 from transformers import AutoTokenizer
 import os
+import pdb
 
 import json
 import torch
@@ -53,6 +54,7 @@ if __name__ == "__main__":
     # parser.add_argument('--start_idx', type=int, default=None)
     # parser.add_argument('--end_idx', type=int, default=None)
     args = parser.parse_args()
+    pdb.set_trace()
 
 
 
