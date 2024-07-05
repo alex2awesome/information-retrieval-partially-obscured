@@ -82,8 +82,8 @@ def main():
 
     input_text = system_prefix.format(source=sources)
 
-    tokenizer = AutoTokenizer.from_pretrained("models--meta-llama--Meta-Llama-3-70B-Instruct")
-    model = AutoModelForCausalLM.from_pretrained("models--meta-llama--Meta-Llama-3-70B-Instruct")
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-70B-Instruct")
+    model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-70B-Instruct")
     inputs = tokenizer(input_text, return_tensors="pt")
     outputs = model.generate(**inputs, max_new_tokens=50)
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
