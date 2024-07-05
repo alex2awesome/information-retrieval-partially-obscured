@@ -142,7 +142,7 @@ def main():
 
     model = load_model(args.model)
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    outputs = model.generate([message], sampling_params)
+    outputs = model.generate([formatted_prompt], sampling_params)
     fname = 'sources_data_70b__200000_200100_obscured.txt'
     with open(fname, 'w') as f:
         f.write("wtf?????")
