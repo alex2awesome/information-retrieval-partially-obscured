@@ -1,5 +1,6 @@
 import re
 import json
+import argparse
 
 def parse_input(text):
     #Seperate by website_url
@@ -21,9 +22,25 @@ def parse_input(text):
     
     return json.dumps(parsed_articles, indent=2, ensure_ascii=False)
 
-sources = open('sources_data_70b__200000_200100.txt', 'r')
-x = sources.read()
-output = parse_input(x)
 
-with open('sources_data_70b__200000_200100.json', 'w') as f:
-    f.write(output)
+def main(args):
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--name', type=str)
+    args = parser.parse_args()
+    filename = args.name
+
+
+    path = "../../../conditional-information-retrieval/" + filename
+
+
+    sources = open(path, 'r')
+    x = sources.read()
+    output = parse_input(x)
+
+    with open(f'{filename}.json', 'w') as f:
+        f.write(output)
+
+if __name__ == "__main__":
+    main()
+
