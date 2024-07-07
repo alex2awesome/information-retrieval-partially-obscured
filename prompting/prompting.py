@@ -60,6 +60,46 @@ def infer(model, messages):
 
     return output[0].outputs[0].text
 
+def obscure(contents, tokenizer, model, sampling_params):
+    jsonfile = []
+
+    for content in contents:
+        url = content['article_url']
+        sources = content['sources']      # a dictionary
+        messages = []
+        for name, description in sources:
+
+            prompt = system_prefix.format(source=description)
+            message = [
+                    {
+                        "role": "system",
+                        "content": "You are an experienced journalist.",
+                    },
+
+                    {
+                        "role": "user",
+                        "content": prompt
+                    },
+                ]
+                
+            formatted_prompt = tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
+            messages.append(formatted_prompt)
+        
+        outputs = model.generate(messages, sampling_params)  
+        sources_obsc = {}
+
+        for name, output in zip(sources.keys(), outputs):
+            sources_obsc[name] = output.outputs[0].text
+
+
+        jsonfile.append({
+            'article_url': url,
+            'sources': sources,
+            'obscured_sources': sources_obsc
+        })
+
+        return json.dumps(jsonfile, indent=2, ensure_ascii=False)
+
 
 def main(args):
 
@@ -72,42 +112,12 @@ def main(args):
     model = load_model(args.model)
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
-    messages = []
-    urls = []
-    sources = []
+    obscured_content = obscure(contents, tokenizer, model, sampling_params)
+    output_path = '../data/' + source_file + '_obscured.json'
 
-    for content in contents:
-        url = content['article_url']
-        source = content['source']
-        prompt = system_prefix.format(source=source)
+    with open(output_path, 'w') as f:
+        f.write(obscured_content)
 
-        
-        message = [
-                {
-                    "role": "system",
-                    "content": "You are an experienced journalist.",
-                },
-
-                {
-                    "role": "user",
-                    "content": prompt
-                },
-            ]
-        formatted_prompt = tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
-        messages.append(formatted_prompt)
-        urls.append(url)
-        sources.append(source)
-        
-    outputs = model.generate(messages, sampling_params)  
-
-    output_content = []
-    for url, source, output in zip(urls, sources, outputs):
-        obsc_source = output.outputs[0].text
-        output_content.append({
-            "article_url": url,
-            "source": source,
-            "obscured_source": obsc_source
-        })
     
     print("DONE!!!!!!!!!!!!")
 

@@ -17,7 +17,7 @@ def parse_input(text):
         
         parsed_articles.append({
             'article_url': article_url,
-            'Sources': source_dict
+            'sources': source_dict
         })
     
     return json.dumps(parsed_articles, indent=2, ensure_ascii=False)
