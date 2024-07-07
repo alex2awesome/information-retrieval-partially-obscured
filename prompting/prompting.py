@@ -1,13 +1,12 @@
 
 from vllm import LLM,  SamplingParams
 from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
 import os
 import pdb
 
 import json
-import torch
 import logging
-
 import argparse
 
 
@@ -19,9 +18,6 @@ logging.basicConfig(
 
 
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
-# with open('config.json', 'r') as f:
-#     config_data = json.load(f)
-# config_data = json.load(open('config.json'))
 os.environ['HF_TOKEN'] = "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"
 os.environ['HF_HOME'] = HF_HOME
 
@@ -121,5 +117,5 @@ if __name__ == "__main__":
     parser.add_argument('--source_file', type=str)
     parser.add_argument("--model", type=str, default="meta-llama/Meta-Llama-3-70B-Instruct")
     args = parser.parse_args()
-    pdb.set_trace()
+    # pdb.set_trace()
     main(args)
