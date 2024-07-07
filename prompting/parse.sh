@@ -16,7 +16,7 @@ python3 parse.py --name sources_data_70b__210000_220000
 
 python3 parse.py --name sources_data_70b__220000_230000
 python3 parse.py --name sources_data_70b__230000_240000
-python3 parse.py --name sources_data_70b__220000_250000
+python3 parse.py --name sources_data_70b__240000_250000
 python3 parse.py --name sources_data_70b__310000_320000
 python3 parse.py --name sources_data_70b__320000_330000
 python3 parse.py --name sources_data_70b__330000_340000
