@@ -24,15 +24,9 @@ def parse_input(text):
 
 
 def main(args):
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--name', type=str)
-    args = parser.parse_args()
     filename = args.name
 
-
     path = "../../../conditional-information-retrieval/" + filename
-
 
     sources = open(path, 'r')
     x = sources.read()
@@ -42,5 +36,8 @@ def main(args):
         f.write(output)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--name', type=str)
+    args = parser.parse_args()
+    main(args)
 
