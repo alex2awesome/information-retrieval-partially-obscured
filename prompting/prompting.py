@@ -98,7 +98,7 @@ def obscure(contents, tokenizer, model, sampling_params):
             'obscured_sources': sources_obsc
         })
 
-        return json.dumps(jsonfile, indent=2, ensure_ascii=False)
+    return json.dumps(jsonfile, indent=2, ensure_ascii=False)
 
 
 def main(args):
