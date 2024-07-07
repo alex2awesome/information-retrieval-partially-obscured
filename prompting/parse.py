@@ -26,13 +26,13 @@ def parse_input(text):
 def main(args):
     filename = args.name
 
-    path = "../../../conditional-information-retrieval/" + filename
+    path = "../../../conditional-information-retrieval/" + filename + '.txt'
 
     sources = open(path, 'r')
     x = sources.read()
     output = parse_input(x)
 
-    with open(f'{filename}.json', 'w') as f:
+    with open(f'../data/{filename}.json', 'w') as f:
         f.write(output)
 
 if __name__ == "__main__":
