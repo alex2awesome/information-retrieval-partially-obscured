@@ -106,7 +106,7 @@ def main(args):
     source_file = args.source_file
     sources_path = '../data/' + source_file + '.json'
     with open(sources_path, 'r') as f:
-        contents = f.read()
+        contents = json.load(f)
 
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = load_model(args.model)
