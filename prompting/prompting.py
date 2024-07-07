@@ -67,7 +67,7 @@ def obscure(contents, tokenizer, model, sampling_params):
         url = content['article_url']
         sources = content['sources']      # a dictionary
         messages = []
-        for name, description in sources:
+        for name, description in sources.items():
 
             prompt = system_prefix.format(source=description)
             message = [
