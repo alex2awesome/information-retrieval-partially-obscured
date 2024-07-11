@@ -13,7 +13,7 @@ def parse_input(text):
         article_content = articles[i+1].strip()
         
         sources = re.findall(r'\*\*(.*?)\*\*\n(.*?)(?=\*\*|$)', article_content, re.DOTALL)
-        source_dict = {source.strip().strip('}'): summary.strip() for source, summary in sources}
+        source_dict = {source.strip(): summary.strip().strip('}') for source, summary in sources}
         
         parsed_articles.append({
             'article_url': article_url,
