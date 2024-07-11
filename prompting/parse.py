@@ -26,7 +26,7 @@ def parse_input(text):
 def main(args):
     filename = args.name
 
-    path = "../../../conditional-information-retrieval/source_summaries/text_summaries/" + filename + '.txt'
+    path = "/project/jonmay_231/spangher/Projects/conditional-information-retrieval/source_summaries/text_summaries//project/jonmay_231/spangher/Projects/conditional-information-retrieval/source_summaries/text_summaries/" + filename + '.txt'
 
     sources = open(path, 'r')
     x = sources.read()
