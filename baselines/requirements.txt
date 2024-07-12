@@ -6,4 +6,4 @@ numpy
 huggingface_hub
 tqdm
 retriv
-faiss-gpu=1.8.0
+faiss-gpu==1.8.0
