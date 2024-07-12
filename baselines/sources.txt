@@ -1,0 +1,144 @@
+
+**BBC R&D**: The BBC Research & Development department provides technical information and insights about the halfRF system, a new technology developed by the BBC. They share details about the spectrum analyzer, transmitter antennas, transmit diversity, and the benefits of using MIMO (Multiple-Input Multiple-Output) signals.
+
+**BBC**: The BBC source shares information about the DVB-NGH standard and its implementation in the halfRF system. They highlight the use of horizontally and vertically polarized MIMO signals to provide transmit diversity and rugged reception on portable devices.
+
+**Socrata Foundation**: The Socrata Foundation provides the core philosophical and mission-oriented content to the article, outlining its purpose and approach to supporting unique organizations that lack resources or financial means.
+
+**Robert Runge**: Robert Runge, a member of Socrata's Board of Directors, offers additional insight into the Socrata Foundation's role in bridging the gap between publicly funded open data projects and underfunded opportunities.
+
+**Mike Duggan**: Detroit Mayor Mike Duggan provides context on why his city turned to data-driven government, highlighting its potential for transparency, accountability, and fact-based decision-making.
+
+**Susan Scrupski**: Susan Scrupski, Founder of Big Mountain Data (BMD), shares the organization's long-term ambition to establish a national open source repository on repeat offender data and discusses its current efforts in tracking heating violations in New York City.
+
+**William Jeffries**: William Jeffries, Founder of Heat Seek NYC, explains the organization's mission to gather data and open it up to protect tenants from unsafe living conditions by tracking the city's worst heating violations.
+
+**Anonymous (PRWeb)**: The author of the news release provides metadata about the article, including contact information for inquiries and a trademark statement.
+
+**CVS:** CVS is the primary source providing information about their decision to remove certain drugs from their insurance coverage. They announce that over a dozen drugs will be dropped, and that equally effective products with lower costs will remain on the list.
+
+**Christine Cramer:** Christine Cramer, a CVS spokeswoman, provides additional context about the changes, including that 26 drugs will be removed from coverage, and that customers can still access cheaper alternatives like Cialis. She also explains the company's primary consideration in making these changes is to provide high-quality products while keeping costs low.
+
+**null (Facebook):** This source simply indicates that a link has been posted to Facebook, providing no specific information about the topic.
+
+**CNN/Money:** CNN/Money provides broader context on the issue of skyrocketing drug prices, stating that spending on prescription drugs reached $374 billion in 2015, up 13% from 2013. They also mention that CVS's list of excluded drugs has increased significantly since 2012.
+
+**Express Scripts Holding Co.:** Express Scripts, a competitor to CVS, provides information about their own policy regarding Viagra and Cialis, stating that they will continue to cover these drugs in 2016.
+
+**CVS Health/Morning Consult:** CVS Health and Morning Consult provided various statistics and findings from a survey they conducted among 500 parents and 340 educators of teens between the ages 13 and 17. The survey data highlights differences in how parents and educators approach mental health conversations with teenagers, with educators being approached more often about mental or emotional concerns.
+
+**Biden Administration:** The Biden Administration provided information on its efforts to improve access to mental health resources in schools, including a nearly $300 million allotment to expand access to mental health care.
+
+**Experts:** Experts emphasized the importance of both parents and educators playing complementary roles in supporting young people's mental health, with a focus on the need for a network of adults to help navigate mental health concerns.
+
+**Vivek Murthy (U.S. Surgeon General):** U.S. Surgeon General Vivek Murthy issued an advisory about the increasing mental health concerns among children and adolescents, stating that "mental health challenges in children, adolescents, and young adults are real and widespread" and that the future wellbeing of the country depends on how we support and invest in the next generation.
+
+**President Biden:** President Biden announced a nearly $300 million allotment to expand access to mental health care in schools, highlighting his administration's priority on improving mental health resources for teenagers.
+
+**Jeremy Brown**: Jeremy Brown provides information about Steve Kubler's statements regarding Syngenta's data and his town of Chanute's recorded atrazine levels. He also shares quotes from Kubler, Marty Springer, and Christopher Diem, offering insights into their thoughts on the reliability and accuracy of Syngenta's weekly tests.
+
+**Tim Murtaugh**: Tim Murtaugh provides information about state and weekly test results in various cities, including Chanute, Osawatomie, McClure, and Baxter Springs. He also shares quotes from Roger Selburg, Stan Schafer, and Lloyd Littrell, offering insights into their thoughts on the data and its implications.
+
+**officials**: The "officials" source is unattributed but provides information about other water officials' reactions to the atrazine levels shown in the weekly tests.
+
+**experts:** The experts provide insights into the potential impact of Signify Health's data collection capabilities and the concerns surrounding data privacy.
+
+**competition experts:** Competition experts warn that CVS could face similar hurdles as Amazon did in its plan to purchase One Medical, raising concerns about competition dominance in the healthcare industry.
+
+**Stacy Mitchell:** Stacy Mitchell, co-director of the Institute for Local Self-Reliance, explains the implications of CVS's acquisition of Signify Health and expresses concern about the company's dominance in the healthcare industry.
+
+**former Amazon employee:** A former Amazon employee shares a personal experience with Prime delivery times, stating that in some areas of Washington state, deliveries can take four to five business days, which may not be the standard two-day shipping promised by Amazon.
+
+**Andy Jassy:** Andy Jassy, CEO of Amazon, is quoted expressing concerns about "irregularities" surrounding the historic union victory at Staten Island warehouse.
+
+**Microsoft:** Microsoft provides information about XP Mode, describing it as a means to having a fully modern computing environment without sacrificing legacy support.
+
+**XP Mode:** XP Mode itself provides some details about its functionality, mentioning that apps run in Seamless Mode appear as if they were running natively in Windows 7 and noting that virtual applications don't play along with the Windows 7 Snap feature. It also mentions that there is a shared clipboard between the operating systems and that users have access to the complete host file system while in Desktop Mode.
+
+**No attribution:** This source provides general information about XP Mode, including its size (472MB), how to download it, and installation instructions. It also explains how to use Seamless Mode and notes some limitations of the virtual application feature. Additionally, this source offers tips for identifying CPU hardware virtualization support and enabling it in the BIOS.
+
+**Donate/ProPublica/Journalism in the Public Interest**: This source is ProPublica, a journalism organization that provides information to the public. They offer their top stories daily and provide data on this website, which is limited from 2009 to 2013.
+
+**newest version/Dollars for Docs/How Industry Dollars Reach Your Doctors**: This source is the newest version of ProPublica's "Dollars for Docs" project, which provides information on how industry dollars reach your doctors. It offers complete data from 2013 onward.
+
+**ProPublica**: This source is ProPublica again, and they last downloaded this record on November 28, 2012.
+
+**Walgreens:** Walgreens provides information about its own company policies and actions. Specifically, they state that half of their employees already make at least $15 an hour, while the other half will see a pay boost. They also mention that the $15 increase will be phased in by November 2022.
+
+**Roz Brewer:** Roz Brewer, Walgreens' CEO, provides quotes about the company's decision to raise its minimum wage to $15 an hour. She states that paying employees a higher wage is essential for retaining and attracting a talented workforce.
+
+**CVS Health:** CVS Health, Walgreens' competitor, provides information about their own minimum wage policy. They state that they will raise their baseline wage to $15 starting next July.
+
+**Economists:** Economists provide estimates about the impact of raising the federal minimum wage to $15 an hour. They estimate that this move would lift over 1 million workers out of poverty.
+
+**Congressional Budget Office:** The Congressional Budget Office provides an estimate about the potential effects of raising the federal minimum wage to $15 an hour. They suggest that while it could reduce poverty, it might also lead to a reduction in jobs.
+
+**States:** States provide information about their own minimum wage policies. More than 20 states have either already raised or committed to raising their hourly wage floor to $15.
+
+**CVS Health:** CVS Health provides information about its own performance and expectations. It reports that customers are returning to normal shopping patterns, fills more prescriptions, and anticipates a lower-than-expected number of Covid-19 vaccines and higher-than-expected Covid-related health-care costs.
+
+**Getty Images (Johnny Louis):** Getty Images does not provide any specific informational content, but rather credits Johnny Louis as the photographer who took an image used in the article. This is not providing new information, but rather acknowledging the source of the visual element used in the article.
+
+**Karen Lynch:** Karen Lynch, CEO of CVS, provides some additional context about the company's approach to vaccine access and outreach during a period of rising Covid-19 cases and the spread of the delta variant.
+
+**Ashtyn Evans (Edward Jones):** Ashtyn Evans, an analyst for Edward Jones, provides expert analysis on the risks facing CVS as it combines its retail, pharmacy, and health insurance businesses and tries to become a "one-stop shop" for healthcare. She also notes that the company must overcome price pressure in its pharmacy services business.
+
+**Karen O'Shea:** Spokeswoman for Wakefern Foods Corp, which includes ShopRite. Karen O'Shea provides information about the closure of 23 ShopRite pharmacies and the transfer of customer prescription files to nearby CVS pharmacies. She also mentions that all support staff from the pharmacy will be offered positions in ShopRite stores.
+
+**Matt Blanchette:** Spokesman for CVS Pharmacy. Matt Blanchette provides information about the deal between CVS and Wakefern Foods Corp, including the number of pharmacies involved and the expected completion date of the transfer process. He also mentions that existing pharmacists and pharmacy technicians will be considered for positions at local CVS Pharmacy locations.
+
+**Representatives:** Unspecified representatives for both ShopRite and CVS Pharmacy. These representatives provide information about the impact on COVID-19 vaccination programs, stating that plans to distribute vaccines remain unaffected by the deal.
+
+**ShopRite:** The company itself provides information about its own COVID-19 vaccination program, announcing plans to distribute the vaccine at 39 of its grocery stores with pharmacies in New Jersey.
+
+**Wall Street Journal:** A news organization providing historical context on the pharmacy industry, stating that CVS and Walgreens account for more than 40% of prescription revenue nationwide.
+
+Patch: This source provides the main news article about restaurant and food service inspections in Rockville and Montgomery County, performed by the Licensure and Regulatory Office at Health and Human Services. It also includes a roundup of local stories and national headlines.
+
+Rolling Stone Report: According to this annotation, there was a "journalistic failure" in the Rolling Stone report on U.Va., which refers to holes or inaccuracies in the reporting of gang rape accusations.
+
+Gang Rape Columbia University: This source cites a report from Columbia University that highlights holes in the reporting of now-discredited gang rape accusations.
+
+Patch Network: This is likely the main news platform providing general information about Patch, including terms of use and privacy policy.
+
+**interactive map: The interactive map provides information about how hard the housing correction is hitting local housing markets. It allows readers to interactively explore the impact of the housing correction on their specific area, giving them a personalized view of the situation.**
+
+**authorities:** The authorities are a source of information about a search being conducted for a missing father who was last seen on a fishing trip with his children. They provide details about the circumstances surrounding the disappearance, including the fact that the man has been missing since Sunday morning.
+
+**State health officials:** State health officials are a source of information about West Nile Virus being found in Bowie mosquitoes. They confirm that this is the first confirmed case of the virus this summer and provide additional context about the situation, including efforts to spray the affected area.
+
+**reports:** Reports are a source of information about Michael Phelps' swimming performance, specifically his time in the 200-meter butterfly. According to these reports, Phelps swam with a time that could have won the 2012 Olympic gold.
+
+**voice:** The voice source provides a brief error message indicating that the request could not be satisfied. This source does not provide any informational content related to the topic or subject of the article, but rather serves as an error message.
+
+**AMD:** AMD provides key information about their new product, Trinity, including its features such as low power requirements, superior gaming experience, and energy-saving technique called "resonant clock mesh technology". They also claim that their chip offers gamers a superior experience and provides details on its GPU-powered gaming capabilities.
+
+**Joe Macri:** Joe Macri, AMD's chief technology officer, provides insight into the development of "resonant clock mesh technology" and how it addresses an engineering problem involved with "clocks".
+
+**Cyclos Semiconductor:** Cyclos Semiconductor provides information about their innovation in energy-saving technique called "resonant clock mesh technology", which they licensed to AMD. They also provide details on how their technique works, including the idea of "recycling" electrical energy and its potential to reduce total core power consumption by up to 10%.
+
+**Sasa Markinkovic:** Sasa Markinkovic, AMD's head of desktop and software product marketing, provides quotes about Trinity's ability to handle high-definition games on systems not fitted with discrete graphics cards and compares it to Intel's Ivy Bridge.
+
+**Sergis Mushell:** Sergis Mushell, processor expert at Gartner, provides analysis about Trinity's advantages in terms of graphics performance and power consumption, but also notes that Intel's bigger ecosystem gives them an advantage in terms of economies of scale and price points.
+
+**Gartner:** Although not explicitly identified as a source, Sergis Mushell mentions his affiliation with the tech analysis firm Gartner, which suggests that Gartner may have provided some background information on the processor market.
+
+**Janet Grothe:** Janet Grothe, Phillips 66 spokeswoman, provides information about the company's response to the incident, including when they were notified, what actions they took, and estimated spill volume.
+
+**Phillips 66:** Phillips 66 provides a statement summarizing their actions in response to the incident, including shutting down the pipeline and notifying regulatory agencies. They also provide information about air monitoring and cleanup efforts.
+
+**Noozhawk Asks:** This source describes how readers can participate in asking questions and working with Noozhawk to find answers. It outlines the process, including sharing questions, voting on top choices, and collaborating with the reader who asked the winning question.
+
+Antony Leather: Antony Leather provides specific, step-by-step instructions and explanations for building a PC. He offers detailed guidance on installing components such as memory, motherboard, case fan, and SSD, and also addresses more general aspects of the build process, including cable management and power supply installation.
+
+The Department: The Department provides information about their role in ensuring the safety of children during transportation on public roadways and their responsibility to ensure that active duty school bus drivers hold an "S" endorsement on their Commercial Driver's License.
+
+NIC, Tennessee Information Division: NIC provides background information about themselves as Tennessee's eGovernment partner since 2000, highlighting their work in building and maintaining the state's official web portal and providing online services to citizens and businesses.
+
+Ray Robinson (LT): Ray Robinson, LT of the Tennessee Highway Patrol, shares his thoughts on the benefits of the THP Pupil Transportation Certification application, mentioning its ability to collect correct data and determine license issues.
+
+The Department: The Department anticipates that the utilization of both the mobile and web-based components will result in a substantial savings in time and expense and a significant reduction in errors due to manual entry.
+
+About NIC: About NIC provides general information about the company as the nation's leading provider of official government websites, online services, and secure payment processing solutions.
+
+**null: Summary** The null source provides a collection of technical instructions and tips related to updating video card drivers. It offers step-by-step guidance on how to navigate various websites (Nvidia Driver Downloads page) to download the correct drivers, including selecting product types, series, products, operating systems, and languages. The source also emphasizes the importance of periodic updates to avoid problems with video cards.
