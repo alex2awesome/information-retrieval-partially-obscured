@@ -24,20 +24,20 @@ def parse_input(text):
 
 
 def main(args):
-    filename = args.name
-
-    path = "/project/jonmay_231/spangher/Projects/conditional-information-retrieval/source_summaries/text_summaries/" + filename + '.txt'
-
-    sources = open(path, 'r')
+    start_idx = args.start_idx
+    end_idx = args.end_idx
+    fname = f'/project/jonmay_231/spangher/Projects/conditional-information-retrieval/sources_data_70b__{start_idx}_{end_idx}.txt'
+    sources = open(fname, 'r')
     x = sources.read()
     output = parse_input(x)
 
-    with open(f'../data/{filename}.json', 'w') as f:
+    with open(f'../data/{fname}.json', 'w') as f:
         f.write(output)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--name', type=str)
+    parser.add_argument('--start_idx', type=int, default=None)
+    parser.add_argument('--end_idx', type=int, default=None)
     args = parser.parse_args()
     main(args)
 
