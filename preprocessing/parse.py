@@ -33,6 +33,7 @@ def main(args):
 
     with open(f'../data/{fname}.json', 'w') as f:
         f.write(output)
+    print('done!!!')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
