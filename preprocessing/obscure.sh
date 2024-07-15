@@ -6,7 +6,7 @@
 #SBATCH --constraint=a100-80gb
 #SBATCH --cpus-per-gpu=10
 #SBATCH --mem=100G
-#SBATCH --partition=gpu
+#SBATCH --partition=isi
 
 echo "Successfully allocated resources"
 module load python/3.11
