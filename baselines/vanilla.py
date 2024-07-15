@@ -25,27 +25,11 @@ def main(args):
         )
 
 
-    source_files = ["sources_data_70b__0_10000.json", 
-                        "sources_data_70b__100000_110000.json", 
-                        "sources_data_70b__10000_20000.json", 
-                        "sources_data_70b__110000_120000.json", 
-                        "sources_data_70b__120000_130000.json",	
-                        "sources_data_70b__200000_200100.json",		
-                        "sources_data_70b__200000_205000.json",	
-                        "sources_data_70b__205000_210000.json",	
-                        "sources_data_70b__210000_220000.json",
-                        "sources_data_70b__220000_230000.json",
-                        "sources_data_70b__230000_240000.json",
-                        "sources_data_70b__240000_250000.json",		
-                        "sources_data_70b__310000_320000.json",
-                        "sources_data_70b__320000_330000.json",
-                        "sources_data_70b__330000_340000.json",
-                        "sources_data_70b__80000_90000.json",	
-                        "sources_data_70b__90000_100000.json"]
+    source_files = [file_name for file_name in os.listdir('../data') if 'obscure' not in filename]
     collection = []
 
     for filename in source_files:
-        full_path = "../data/" + filename + '.josn'
+        full_path = "../data/" + filename
         with open(full_path, 'r') as f:
             data = json.load(f)
             for article in data:
