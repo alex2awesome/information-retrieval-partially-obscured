@@ -28,7 +28,9 @@ def main(args):
     end_idx = args.end_idx
     fname = f'/project/jonmay_231/spangher/Projects/conditional-information-retrieval/sources_data_70b__{start_idx}_{end_idx}.txt'
     sources = open(fname, 'r')
+    print(f"reading {start_idx}-{end_idx}")
     x = sources.read()
+    print(f"parsing {start_idx}-{end_idx}")
     output = parse_input(x)
 
     with open(f'../data/{fname}.json', 'w') as f:
