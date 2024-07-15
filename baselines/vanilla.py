@@ -25,7 +25,7 @@ def main(args):
         )
 
 
-    source_files = [file_name for file_name in os.listdir('../data') if 'obscure' not in filename]
+    source_files = [file_name for file_name in os.listdir('../data') if 'obscure' not in file_name]
     collection = []
 
     for filename in source_files:
