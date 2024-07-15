@@ -93,8 +93,10 @@ def obscure(contents, tokenizer, model, sampling_params):
 
 
 def main(args):
-    
 
+    file_name = args.source_file
+    if 'obscured' in file_name:
+        return
 
     # source_file = args.source_file
     # sources_path = '../data/' + source_file + '.json'
@@ -106,20 +108,21 @@ def main(args):
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
     directory = '../data'
-    for file_name in os.listdir(directory):
-        file_path = os.path.join(directory, file_name)
-        with open(file_path, 'r') as f:
-            contents = json.load(f)
+    
+    # for file_name in os.listdir(directory):
+    file_path = os.path.join(directory, file_name)
+    with open(file_path, 'r') as f:
+        contents = json.load(f)
 
-        obscured_content = obscure(contents, tokenizer, model, sampling_params)
-        output_name = file_name.split('.')[0] + '_obscured.json'
-        output_path = '../data/' + output_name
+    obscured_content = obscure(contents, tokenizer, model, sampling_params)
+    output_name = file_name.split('.')[0] + '_obscured.json'
+    output_path = '../data/' + output_name
 
-        with open(output_path, 'w') as f:
-            f.write(obscured_content)
+    with open(output_path, 'w') as f:
+        f.write(obscured_content)
 
-        
-        print("DONE!!!!!!!!!!!!")
+    
+    print("DONE!!!!!!!!!!!!")
 
 
 if __name__ == "__main__":

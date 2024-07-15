@@ -11,4 +11,13 @@
 echo "Successfully allocated resources"
 module load python/3.11
 pip install -r requirements.txt
-python3 obscure.py
+
+directory="../data"
+
+for file in "$directory"/*
+do
+    if [ -f "$file" ]; then
+        echo "Obscuring file: $file"
+        python3 obscure.py --source_file "$file"
+    fi
+done
