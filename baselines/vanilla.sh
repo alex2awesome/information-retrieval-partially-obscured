@@ -13,6 +13,4 @@ module load python/3.11
 module load conda
 source conda activate rr
 
-conda install -c pytorch -c nvidia faiss-gpu=1.8.0
-pip install -r requirements.txt
 python3 vanilla.py 
