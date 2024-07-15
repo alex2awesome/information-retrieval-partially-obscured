@@ -51,15 +51,6 @@ def load_model(model):
     )
     return model
 
-
-def infer(model, messages):
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-70B-Instruct")
-    formatted_prompt =  tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    output = model.generate(formatted_prompt, sampling_params)
-
-    return output[0].outputs[0].text
-
 def obscure(contents, tokenizer, model, sampling_params):
     jsonfile = []
 
