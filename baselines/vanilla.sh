@@ -10,6 +10,8 @@
 
 
 module load conda
-conda activate rr
+source conda activate rr
+conda env update -f env.yaml
+pip install -r requirements.txt
 
 python3 vanilla.py 
