@@ -9,7 +9,6 @@
 #SBATCH --partition=gpu
 
 
-module load python/3.11
 module load conda
 source conda activate rr
 
