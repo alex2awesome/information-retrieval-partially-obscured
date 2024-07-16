@@ -10,6 +10,6 @@
 
 
 module load conda
-source conda activate rr
+conda activate rr
 
 python3 vanilla.py 
