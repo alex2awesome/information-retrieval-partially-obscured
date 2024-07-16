@@ -17,25 +17,6 @@ HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
 os.environ['HF_TOKEN'] = "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"
 os.environ['HF_HOME'] = HF_HOME
 
-system_prefix_obscure = '''
-For each given text, obscure the specific details by leaving out all important information except for a short, generalized biographical contextless description about who/what the source is.
-
-Format:
-INPUT: Identity information + Biographical information + Given information
-OUTPUT: Identity information + Biographical information
-
-Example:
-INPUT: The Biden Administration provided information on its efforts to improve access to mental health resources in schools, including a nearly 00 million allotment to expand access to mental health care.
-OUTPUT: The Biden Administration is the executive branch of the U.S. federal government under the leadership of President Joe Biden.
-
-If there is no information in the original entry on what the source is, only include the source name and nothing else. However, if you are fully certain that you can infer what the source is without hallucinating, include that.
-Execute this task on all entries below. Only include one output line for each entry, include nothing except what comes after "OUTPUT" (excluding the word"OUTPUT"):
-
-It's important to return the obscured text only.
-Here's the text:
-{source}
-'''
-
 system_prefix_question = '''
 Given the following information provided by a source, create a question that would elicit this information as an answer. The question should be specific enough to target the given information, but general enough that it doesn't reveal the answer itself.
 
@@ -63,60 +44,47 @@ def load_model(model):
     )
     return model
 
-def infer(model, messages):
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-70B-Instruct")
-    formatted_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
-    output = model.generate(formatted_prompt, sampling_params)
-    return output[0].outputs[0].text
-
 def process_content(contents, tokenizer, model, sampling_params):
     jsonfile = []
 
     for content in contents:
         url = content['article_url']
         sources = content['sources']
-        messages_obscure = []
+        obscured_sources = content['obscured_sources']
         messages_question = []
 
         for name, description in sources.items():
-            prompt_obscure = system_prefix_obscure.format(source=description)
             prompt_question = system_prefix_question.format(source=description)
 
-            message_obscure = [
-                {"role": "system", "content": "You are an experienced journalist."},
-                {"role": "user", "content": prompt_obscure}
-            ]
             message_question = [
                 {"role": "system", "content": "You are an experienced journalist."},
                 {"role": "user", "content": prompt_question}
             ]
 
-            messages_obscure.append(tokenizer.apply_chat_template(message_obscure, tokenize=False, add_generation_prompt=True))
             messages_question.append(tokenizer.apply_chat_template(message_question, tokenize=False, add_generation_prompt=True))
 
-        outputs_obscure = model.generate(messages_obscure, sampling_params)
         outputs_question = model.generate(messages_question, sampling_params)
 
-        sources_obsc = {}
         sources_question = {}
 
-        for name, output_obscure, output_question in zip(sources.keys(), outputs_obscure, outputs_question):
-            sources_obsc[name] = output_obscure.outputs[0].text
+        for name, output_question in zip(sources.keys(), outputs_question):
             sources_question[name] = output_question.outputs[0].text
 
         jsonfile.append({
             'article_url': url,
             'sources': sources,
-            'obscured_sources': sources_obsc,
-            'source_questions': sources_question
+            'obscured_sources': obscured_sources,
+            'questions': sources_question
         })
 
     return json.dumps(jsonfile, indent=2, ensure_ascii=False)
 
 def main(args):
     source_file = args.source_file
-    sources_path = '../data/' + source_file + '.json'
+    if 'obsured' not in source_file:
+        return
+    
+    sources_path = os.path.join('../data', source_file)
     with open(sources_path, 'r') as f:
         contents = json.load(f)
 
@@ -125,7 +93,7 @@ def main(args):
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
     processed_content = process_content(contents, tokenizer, model, sampling_params)
-    output_path = '../data/' + source_file + '_processed.json'
+    output_path = sources_path.replace("obscured", "processed")
 
     with open(output_path, 'w') as f:
         f.write(processed_content)
@@ -138,3 +106,4 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, default="meta-llama/Meta-Llama-3-70B-Instruct")
     args = parser.parse_args()
     main(args)
+    
