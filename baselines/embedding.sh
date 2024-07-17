@@ -14,4 +14,4 @@ source conda activate rr
 conda env update -f env.yaml
 pip install -r requirements.txt
 
-python3 vanilla.py 
+python3 embedding.py 

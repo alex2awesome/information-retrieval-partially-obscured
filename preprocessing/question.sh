@@ -12,12 +12,4 @@ echo "Successfully allocated resources"
 module load python/3.11
 pip install -r requirements.txt
 
-directory="../data"
-
-for file in "$directory"/*
-do
-    if [ -f "$file" ]; then
-        echo "Generating question for: $file"
-        python3 question.py --source_file "$file"
-    fi
-done
+python3 question.py
