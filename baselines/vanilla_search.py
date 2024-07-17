@@ -22,7 +22,7 @@ def main(args):
         device=args.device,
         use_ann=True,
     )
-
+    '''
     # Load queries from a file
     with open(args.query_file, 'r') as f:
         queries = json.load(f)
@@ -41,6 +41,10 @@ def main(args):
         json.dump(results, f, indent=2)
 
     print(f"Search completed. Results saved to {args.output_file}")
+
+    '''
+    print(dr.search('How does the halfRF system created by the BBC work?'))
+    return
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
