@@ -162,6 +162,7 @@ def main(args):
             continue
         if exist_obscure(file_path):
             print(f'{file_name} is already obscured.')
+            break
             continue
         
         with open(file_path, 'r') as f:
@@ -183,4 +184,3 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, default="meta-llama/Meta-Llama-3-70B-Instruct")
     args = parser.parse_args()
     main(args)
-    
