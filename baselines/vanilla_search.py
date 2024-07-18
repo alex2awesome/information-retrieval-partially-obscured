@@ -51,7 +51,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--embedding_model', type=str, default='Salesforce/SFR-Embedding-2_R')
     parser.add_argument('--embedding_dim', type=int, default=None)
-    parser.add_argument('--index', type=int, default='sources')
+    parser.add_argument('--index', type=str, default='sources')
     parser.add_argument('--max_seq_length', type=int, default=None)
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu')
     parser.add_argument('--query_file', type=str, required=True, help='Path to the file containing queries')
