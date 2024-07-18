@@ -1,6 +1,7 @@
 import argparse
 import os
 import json
+import torch
 from dense_retriever import MyDenseRetriever
 from dr_search import search
 
@@ -59,4 +60,3 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     main(args)
-    
