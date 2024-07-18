@@ -5,7 +5,7 @@
 #SBATCH --gres=gpu:4
 #SBATCH --cpus-per-gpu=10
 #SBATCH --mem=400G
-#SBATCH --partition=gpu
+#SBATCH --partition=sda7
 
 source /home1/spangher/.bashrc
 cd /project/jonmay_231/spangher/Projects/information-retrieval-partially-obscured/information-retrieval-partially-obscured/preprocessing
