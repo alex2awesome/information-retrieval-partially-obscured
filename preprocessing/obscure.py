@@ -162,7 +162,6 @@ def main(args):
             continue
         if exist_obscure(file_path):
             print(f'{file_name} is already obscured.')
-            break
             continue
         
         with open(file_path, 'r') as f:
