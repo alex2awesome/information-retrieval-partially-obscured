@@ -1,14 +1,15 @@
 #!/bin/bash
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --time=40:00:00
-#SBATCH --gres=gpu:4
+#SBATCH --time=16:00:00
+#SBATCH --gres=gpu:a100:2
+#SBATCH --constraint=a100-80gb
 #SBATCH --cpus-per-gpu=10
-#SBATCH --mem=400G
-#SBATCH --partition=sda7
+#SBATCH --mem=100G
+#SBATCH --partition=gpu
 
-source /home1/spangher/.bashrc
-cd /project/jonmay_231/spangher/Projects/information-retrieval-partially-obscured/information-retrieval-partially-obscured/preprocessing
-conda activate vllm-py310
+echo "Successfully allocated resources"
+module load python/3.11
+pip install -r requirements.txt
 
-python obscure.py
+python3 obscure.py
