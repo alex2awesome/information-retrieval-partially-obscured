@@ -112,12 +112,10 @@ def main(args):
             contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
-        print("processed_content", processed_content)
         output_path = file_path.replace("obscured", "processed")
 
-        # with open(output_path, 'w') as f:
-        #     f.write(processed_content)
-        break
+        with open(output_path, 'w') as f:
+            f.write(processed_content)
 
     print("Processing completed successfully!")
 

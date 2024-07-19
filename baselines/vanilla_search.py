@@ -54,8 +54,8 @@ if __name__ == "__main__":
     parser.add_argument('--index', type=str, default='sources')
     parser.add_argument('--max_seq_length', type=int, default=None)
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu')
-    parser.add_argument('--query_file', type=str, required=True, help='Path to the file containing queries')
-    parser.add_argument('--output_file', type=str, required=True, help='Path to save the search results')
+    # parser.add_argument('--query_file', type=str, required=True, help='Path to the file containing queries')
+    # parser.add_argument('--output_file', type=str, required=True, help='Path to save the search results')
     parser.add_argument('--top_k', type=int, default=10, help='Number of top results to return for each query')
     
     args = parser.parse_args()
