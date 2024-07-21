@@ -104,6 +104,7 @@ def main(args):
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
     directory = '../data'
+    output_directory = '../processed_data'
     for filename in os.listdir(directory):
         if 'obscured' not in filename:
             continue
@@ -112,7 +113,8 @@ def main(args):
             contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
-        output_path = file_path.replace("obscured", "processed")
+        output_name = filename.replace("obscured", "processed")
+        output_path = os.path.join(output_directory, output_name)
 
         with open(output_path, 'w') as f:
             f.write(processed_content)
