@@ -104,7 +104,7 @@ def main(args):
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
     directory = '../data'
-    output_directory = '../processed_data'
+    output_directory = '../data_preprocessed'
     for filename in os.listdir(directory):
         if 'obscured' not in filename:
             continue
