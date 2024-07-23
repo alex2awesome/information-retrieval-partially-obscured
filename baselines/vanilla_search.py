@@ -50,17 +50,19 @@ def main(args):
     print(dr.encoder)
     print(dr.encoder.embedding_dim)
 
-    directory = '../data_preprocessed'
-    search_results = []
-    for filename in os.listdir(directory):
-        file_path = os.path.join(directory, filename)
-        with open(file_path, 'r') as f:
-            contents = json.load(f)
-        search_result = query_search(dr, contents)
-        search_results.extend(search_result)
+    # directory = '../data_preprocessed'
+    # search_results = []
+    # for filename in os.listdir(directory):
+    #     file_path = os.path.join(directory, filename)
+    #     with open(file_path, 'r') as f:
+    #         contents = json.load(f)
+    #     search_result = query_search(dr, contents)
+    #     search_results.extend(search_result)
 
-    with open('../data_baselines/vanilla.json', 'w') as f:
-        json.dump(search_results, f, indent=2)
+    # with open('../data_baselines/vanilla.json', 'w') as f:
+    #     json.dump(search_results, f, indent=2)
+
+    print(dr.search("What is BBC?", cutoff=10))
 
     print("DONE!!!")
 
