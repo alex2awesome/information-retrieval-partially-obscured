@@ -112,12 +112,13 @@ def main(args):
 
     directory = '../data'
     output_directory = '../data_preprocessed'
+    count = 0
     for filename in os.listdir(directory):
         if 'obscured' not in filename:
             continue
-        elif exist_question(filename):
-            print(f'{filename} is already preprocessed.')
-            continue
+        # elif exist_question(filename):
+        #     print(f'{filename} is already preprocessed.')
+        #     continue
         file_path = os.path.join(directory, filename)
         with open(file_path, 'r') as f:
             contents = json.load(f)
@@ -128,6 +129,8 @@ def main(args):
 
         with open(output_path, 'w') as f:
             f.write(processed_content)
+        count += 1
+        print(f"{count} files preprocessed!")
 
     print("Processing completed successfully!")
 
