@@ -57,7 +57,7 @@ def main(args):
         file_path = os.path.join(directory, filename)
         with open(file_path, 'r') as f:
             contents = json.load(f)
-        search_result = query_search(dr, contents, filename)
+        search_result = query_search(dr, contents)
         search_results.extend(search_result)
 
     with open('../data_baselines/vanilla.json', 'w') as f:
