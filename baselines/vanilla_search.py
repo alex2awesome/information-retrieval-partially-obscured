@@ -12,7 +12,7 @@ os.environ['HF_HOME'] = HF_HOME
 cwd = os.path.dirname(os.path.abspath(__file__))
 os.environ['RETRIV_BASE_PATH'] = cwd
 
-def query_search(dr, contents, filename):
+def query_search(dr, contents):
     search_results = []
     for content in contents:
         sources = content['sources']
