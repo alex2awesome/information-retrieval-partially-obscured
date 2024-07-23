@@ -44,12 +44,9 @@ def query_search(dr, contents):
 
 
 def main(args):
-    # Load the existing index
     dr = MyDenseRetriever.load(
         index_name=args.index
     )
-    print(dr.encoder)
-    print(dr.encoder.embedding_dim)
 
     directory = '../data_preprocessed'
     search_results = []
@@ -64,9 +61,7 @@ def main(args):
             for question, source in zip(questions.items(), sources.items()):
                 q = question[1]
                 s = source[1]
-                print("question", type(q), q)
-                print("source", s)
-                topk = dr.search(question, cutoff=10)
+                topk = dr.search(q, cutoff=10)
                 search_results.append({
                     "query": q,
                     "topk": topk,
