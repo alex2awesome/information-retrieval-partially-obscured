@@ -39,6 +39,7 @@ def query_search(dr, contents):
                 "ground_truth": "..."
             }, {...}, {...}]
             '''
+    return search_results
             
 
 
@@ -63,9 +64,10 @@ def main(args):
     #     json.dump(search_results, f, indent=2)
 
     print(dr.search("This is a easy search", cutoff=10))
-    print(dr.search("What do recent regulatory actions signal about the future of cryptocurrency investments and the role of ICOs?", cutoff=10))
+    print(dr.search("What is the tech industry's response to the recent immigration ban, and how are companies supporting affected employees?", cutoff=10))
+    # print(dr.search("What do recent regulatory actions signal about the future of cryptocurrency investments and the role of ICOs?", cutoff=10))
 
-    print(dr.search("What are the key risks and red flags investors should be aware of when considering investments in companies involved in initial coin offerings (ICOs)?", cutoff=10))
+    # print(dr.search("What are the key risks and red flags investors should be aware of when considering investments in companies involved in initial coin offerings (ICOs)?", cutoff=10))
 
     print("DONE!!!")
 
