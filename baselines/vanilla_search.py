@@ -4,6 +4,7 @@ import json
 import torch
 from dense_retriever import MyDenseRetriever
 from dr_search import search
+import pdb
 
 # Set environment variables
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
@@ -45,14 +46,9 @@ def query_search(dr, contents):
 def main(args):
     # Load the existing index
     dr = MyDenseRetriever.load(
-        index_name=args.index,
-        model=args.embedding_model,
-        normalize=True,
-        max_length=args.max_seq_length,
-        embedding_dim=args.embedding_dim,
-        device=args.device,
-        use_ann=True,
+        index_name=args.index
     )
+    pdb.set_trace()
     directory = '../data_preprocessed'
     search_results = []
     for filename in os.listdir(directory):
