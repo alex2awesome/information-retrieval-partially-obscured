@@ -90,6 +90,13 @@ def process_content(contents, tokenizer, model, sampling_params):
 
     return json.dumps(jsonfile, indent=2, ensure_ascii=False)
 
+def exist_question(filename):
+    filename_processed = f"../data_preprocessed/{filename}"
+    if os.path.isfile(filename_processed):
+        return True
+    return False
+
+
 def main(args):
     # source_file = args.source_file
     # if 'obsured' not in source_file:
@@ -107,6 +114,9 @@ def main(args):
     output_directory = '../data_preprocessed'
     for filename in os.listdir(directory):
         if 'obscured' not in filename:
+            continue
+        elif exist_question(filename):
+            print(f'{filename} is already preprocessed.')
             continue
         file_path = os.path.join(directory, filename)
         with open(file_path, 'r') as f:
