@@ -15,7 +15,7 @@ os.environ['RETRIV_BASE_PATH'] = cwd
 def main(args):
 
     dr = MyDenseRetriever(
-            index_name="sources",
+            index_name="obscured_sources",
             model=args.embedding_model,
             normalize=True,
             max_length=args.max_seq_length,
@@ -25,15 +25,15 @@ def main(args):
         )
 
 
-    source_files = [file_name for file_name in os.listdir('../data') if 'obscure' not in file_name]
+    obscured_source_files = [file_name for file_name in os.listdir('../data') if 'obscure' in file_name]
     collection = []
 
-    for filename in source_files:
+    for filename in obscured_source_files:
         full_path = "../data/" + filename
         with open(full_path, 'r') as f:
             data = json.load(f)
             for article in data:
-                for id, summary in article['sources'].items():
+                for id, summary in article['obscured_sources'].items():
                     new_source_embedding = {"id": id, "text": summary}
                     collection.append(new_source_embedding)
     dr.index(

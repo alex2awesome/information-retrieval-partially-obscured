@@ -67,11 +67,13 @@ def main(args):
                     "topk": topk,
                     "ground_truth": s
                 })
+        print(f"finished processing {filename}")
 
 
         # search_result = query_search(dr, contents)
         # search_results.extend(search_result)
 
+    print("writing outputs")
     with open('../data_baselines/vanilla.json', 'w') as f:
         json.dump(search_results, f, indent=2)
 
