@@ -20,6 +20,8 @@ def query_search(dr, contents):
         for question, source in zip(questions.items(), sources.items()):
             q = question[1]
             s = source[1]
+            print("question", q)
+            print("source", s)
             topk = dr.search(question, cutoff=args.top_k)
             search_results.append({
                 "query": q,
