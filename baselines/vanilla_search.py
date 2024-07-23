@@ -12,6 +12,34 @@ os.environ['HF_HOME'] = HF_HOME
 cwd = os.path.dirname(os.path.abspath(__file__))
 os.environ['RETRIV_BASE_PATH'] = cwd
 
+def query_search(dr, contents, filename):
+    search_results = []
+    for content in contents:
+        sources = content['sources']
+        questions = content['questions']
+        for question, source in zip(questions.items(), sources.items()):
+            q = question[1]
+            s = source[1]
+            topk = dr.search(question, cutoff=args.top_k)
+            search_results.append({
+                "query": q,
+                "topk": topk,
+                "ground_truth": s
+            })
+
+
+            '''
+            [{
+                "query": "...",
+                "topk": [{"id": source_name, "text": "...", "score": 0.1}, 
+                         {'id': 'Kirsten Gillibrand', 'text': 'Kirsten Gillibrand is a Senator.', 'score': 0.57928383}
+                         ],
+                "ground_truth": "..."
+            }, {...}, {...}]
+            '''
+            
+
+
 def main(args):
     # Load the existing index
     dr = MyDenseRetriever.load(
@@ -23,28 +51,20 @@ def main(args):
         device=args.device,
         use_ann=True,
     )
-    '''
-    # Load queries from a file
-    with open(args.query_file, 'r') as f:
-        queries = json.load(f)
+    directory = '../data_preprocessed'
+    search_results = []
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        with open(file_path, 'r') as f:
+            contents = json.load(f)
+        search_result = query_search(dr, contents, filename)
+        search_results.extend(search_result)
 
-    # Perform search for each query
-    results = []
-    for query in queries:
-        search_results = dr.search(query, cutoff=args.top_k)
-        results.append({
-            "query": query,
-            "results": search_results
-        })
+    with open('../data_baselines/vanilla.json', 'w') as f:
+        json.dump(search_results, f, indent=2)
 
-    # Save results to a file
-    with open(args.output_file, 'w') as f:
-        json.dump(results, f, indent=2)
+    print("DONE!!!")
 
-    print(f"Search completed. Results saved to {args.output_file}")
-
-    '''
-    print(dr.search('How does the halfRF system created by the BBC work?'))
     return
 
 if __name__ == "__main__":
@@ -54,8 +74,6 @@ if __name__ == "__main__":
     parser.add_argument('--index', type=str, default='sources')
     parser.add_argument('--max_seq_length', type=int, default=None)
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu')
-    # parser.add_argument('--query_file', type=str, required=True, help='Path to the file containing queries')
-    # parser.add_argument('--output_file', type=str, required=True, help='Path to save the search results')
     parser.add_argument('--top_k', type=int, default=10, help='Number of top results to return for each query')
     
     args = parser.parse_args()
