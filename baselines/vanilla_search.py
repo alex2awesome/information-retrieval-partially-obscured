@@ -51,20 +51,39 @@ def main(args):
     print(dr.encoder)
     print(dr.encoder.embedding_dim)
 
-    # directory = '../data_preprocessed'
-    # search_results = []
-    # for filename in os.listdir(directory):
-    #     file_path = os.path.join(directory, filename)
-    #     with open(file_path, 'r') as f:
-    #         contents = json.load(f)
-    #     search_result = query_search(dr, contents)
-    #     search_results.extend(search_result)
+    directory = '../data_preprocessed'
+    search_results = []
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        with open(file_path, 'r') as f:
+            contents = json.load(f)
 
-    # with open('../data_baselines/vanilla.json', 'w') as f:
-    #     json.dump(search_results, f, indent=2)
+        for content in contents:
+            sources = content['sources']
+            questions = content['questions']
+            for question, source in zip(questions.items(), sources.items()):
+                q = question[1]
+                s = source[1]
+                print("question", type(q), q)
+                print("source", s)
+                topk = dr.search(question, cutoff=10)
+                search_results.append({
+                    "query": q,
+                    "topk": topk,
+                    "ground_truth": s
+                })
 
-    print(dr.search("This is a easy search", cutoff=10))
-    print(dr.search("What is the tech industry's response to the recent immigration ban, and how are companies supporting affected employees?", cutoff=10))
+
+        # search_result = query_search(dr, contents)
+        # search_results.extend(search_result)
+
+    with open('../data_baselines/vanilla.json', 'w') as f:
+        json.dump(search_results, f, indent=2)
+
+
+
+    # print(dr.search("This is a easy search", cutoff=10))
+    # print(dr.search("What is the tech industry's response to the recent immigration ban, and how are companies supporting affected employees?", cutoff=10))
     # print(dr.search("What do recent regulatory actions signal about the future of cryptocurrency investments and the role of ICOs?", cutoff=10))
 
     # print(dr.search("What are the key risks and red flags investors should be aware of when considering investments in companies involved in initial coin offerings (ICOs)?", cutoff=10))
