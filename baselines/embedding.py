@@ -38,6 +38,7 @@ def main(args):
                     collection.append(new_source_embedding)
 
     print("number of documents:", len(collection))
+    print(collection[0])
     dr.index(
         collection=collection, 
         show_progress=True, 
