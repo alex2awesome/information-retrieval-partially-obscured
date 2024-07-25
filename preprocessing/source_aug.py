@@ -16,6 +16,7 @@ logging.basicConfig(
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
 os.environ['HF_TOKEN'] = "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"
 os.environ['HF_HOME'] = HF_HOME
+os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
 
 system_prefix_question = '''
 

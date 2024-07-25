@@ -16,6 +16,7 @@ logging.basicConfig(
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
 os.environ['HF_TOKEN'] = "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"
 os.environ['HF_HOME'] = HF_HOME
+os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
 
 system_prefix_question = '''
 You are an AI assistant helping a journalist find appropriate sources for a story. Given the information provided by a source, your task is to create a very brief question that might elicit this source. The question should be specific enough to target the given information, but general enough that it doesn't reveal the source's identity.

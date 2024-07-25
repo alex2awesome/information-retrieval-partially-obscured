@@ -103,18 +103,6 @@ def obscure(contents, tokenizer, model, sampling_params):
                     },
                 ]
             
-            # message_question = [
-            #         {
-            #             "role": "system",
-            #             "content": "You are an experienced journalist.",
-            #         },
-
-            #         {
-            #             "role": "user",
-            #             "content": prompt_question
-            #         },
-            #     ]
-            
                 
             formatted_prompt_obscure = tokenizer.apply_chat_template(message_obscure, tokenize=False, add_generation_prompt=True)
             # formatted_prompt_question = tokenizer.apply_chat_template(message_question, tokenize=False, add_generation_prompt=True)

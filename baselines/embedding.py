@@ -36,6 +36,8 @@ def main(args):
                 for id, summary in article['obscured_sources'].items():
                     new_source_embedding = {"id": id, "text": summary}
                     collection.append(new_source_embedding)
+
+    print("number of documents:", len(collection))
     dr.index(
         collection=collection, 
         show_progress=True, 
