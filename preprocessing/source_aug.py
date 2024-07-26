@@ -77,6 +77,11 @@ def process_content(contents, tokenizer, model, sampling_params):
 
     return json.dumps(jsonfile, indent=2, ensure_ascii=False)
 
+def exist_aug(output_path):
+    if os.path.isfile(output_path):
+        return True
+    return False
+
 
 def main(args):
     tokenizer = AutoTokenizer.from_pretrained(args.model)
@@ -90,12 +95,17 @@ def main(args):
         if 'obscured' not in filename:
             continue
         file_path = os.path.join(directory, filename)
+        output_name = filename.replace("obscured", "source_aug")
+        output_path = os.path.join(output_directory, output_name)
+        if exist_aug(output_path):
+            print(f'{filename} is already augmented.')
+            continue
+
         with open(file_path, 'r') as f:
             contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
-        output_name = filename.replace("obscured", "source_aug")
-        output_path = os.path.join(output_directory, output_name)
+        
 
         with open(output_path, 'w') as f:
             f.write(processed_content)

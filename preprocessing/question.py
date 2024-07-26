@@ -91,21 +91,13 @@ def process_content(contents, tokenizer, model, sampling_params):
 
     return json.dumps(jsonfile, indent=2, ensure_ascii=False)
 
-def exist_question(filename):
-    filename_processed = f"../data_preprocessed/{filename}"
-    if os.path.isfile(filename_processed):
+def exist_question(output_path):
+    if os.path.isfile(output_path):
         return True
     return False
 
 
 def main(args):
-    # source_file = args.source_file
-    # if 'obsured' not in source_file:
-    #     return
-    
-    # sources_path = os.path.join('../data', source_file)
-    # with open(sources_path, 'r') as f:
-    #     contents = json.load(f)
 
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = load_model(args.model)
@@ -117,16 +109,17 @@ def main(args):
     for filename in os.listdir(directory):
         if 'obscured' not in filename:
             continue
-        # elif exist_question(filename):
-        #     print(f'{filename} is already preprocessed.')
-        #     continue
         file_path = os.path.join(directory, filename)
+        output_name = filename.replace("obscured", "processed")
+        output_path = os.path.join(output_directory, output_name)
+        if exist_question(output_path):
+            print(f'{filename} is already preprocessed.')
+            continue
         with open(file_path, 'r') as f:
             contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
-        output_name = filename.replace("obscured", "processed")
-        output_path = os.path.join(output_directory, output_name)
+        
 
         with open(output_path, 'w') as f:
             f.write(processed_content)
