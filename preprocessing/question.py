@@ -4,6 +4,7 @@ import logging
 import argparse
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
+import unicodedata
 import torch
 import os
 
@@ -80,7 +81,8 @@ def process_content(contents, tokenizer, model, sampling_params):
         sources_question = {}
 
         for name, output_question in zip(sources.keys(), outputs_question):
-            sources_question[name] = output_question.outputs[0].text
+            output_question = unicodedata.normalize('NFKC', output_question.outputs[0].text)
+            sources_question[name] = output_question.encode('utf-8')
 
         jsonfile.append({
             'article_url': url,
