@@ -345,8 +345,6 @@ class MyDenseRetriever(DenseRetriever):
             Either a list of documents or a dictionary of ids and their corresponding scores, based on return_docs.
         """
         encoded_query = self.encoder(query)
-        print(encoded_query)
-        print(encoded_query.shape)
         encoded_query = encoded_query.reshape(1, len(encoded_query))
 
         if self.use_ann:
