@@ -3,7 +3,7 @@ import os
 import json
 import torch
 from dense_retriever import MyDenseRetriever
-import tqdm
+from tqdm.auto import tqdm
 from dr_search import search
 
 # Set environment variables
