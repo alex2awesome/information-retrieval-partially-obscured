@@ -3,6 +3,7 @@ import os
 import json
 import torch
 from dense_retriever import MyDenseRetriever
+import tqdm
 from dr_search import search
 
 # Set environment variables
@@ -50,7 +51,7 @@ def main(args):
 
     directory = '../data_preprocessed'
     search_results = []
-    for filename in os.listdir(directory):
+    for filename in tqdm(os.listdir(directory)):
         file_path = os.path.join(directory, filename)
         with open(file_path, 'r') as f:
             contents = json.load(f)
