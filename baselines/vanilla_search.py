@@ -46,7 +46,8 @@ def query_search(dr, contents):
 
 def main(args):
     dr = MyDenseRetriever.load(
-        index_name=args.index
+        index_name=args.index,
+        device=args.device
     )
 
     directory = '../data_preprocessed'
@@ -57,7 +58,7 @@ def main(args):
             contents = json.load(f)
 
         for content in contents:
-            sources = content['sources']
+            sources = content['obscured_sources']
             questions = content['questions']
             for question, source in zip(questions.items(), sources.items()):
                 q = question[1]
