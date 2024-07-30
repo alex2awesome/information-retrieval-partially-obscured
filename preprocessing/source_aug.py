@@ -4,6 +4,7 @@ import logging
 import argparse
 from vllm import LLM, SamplingParams
 from transformers import AutoTokenizer
+import unicodedata
 import torch
 import os
 
@@ -66,7 +67,7 @@ def process_content(contents, tokenizer, model, sampling_params):
         sources_augmentation = {}
 
         for name, output_question in zip(sources.keys(), outputs_question):
-            sources_augmentation[name] = output_question.outputs[0].text
+            sources_augmentation[name] = unicodedata.normalize('NFKC', output_question.outputs[0].text)
 
         jsonfile.append({
             'article_url': url,
@@ -101,13 +102,13 @@ def main(args):
             print(f'{filename} is already augmented.')
             continue
 
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
         
 
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(processed_content)
         count += 1
         print(f"{count} files augmented!")

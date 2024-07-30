@@ -117,13 +117,13 @@ def main(args):
         if exist_question(output_path):
             print(f'{filename} is already preprocessed.')
             continue
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
         
 
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(processed_content)
         count += 1
         print(f"{count} files preprocessed!")
