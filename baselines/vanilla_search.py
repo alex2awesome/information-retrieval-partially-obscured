@@ -49,43 +49,61 @@ def main(args):
         index_name=args.index,
         device=args.device
     )
-    print(f"Using {args.device} as device")
+    # print(f"Using {args.device} as device")
     directory = '../data_preprocessed'
-    search_results = []
+    # search_results = []
+    # for filename in tqdm(os.listdir(directory)):
+    #     file_path = os.path.join(directory, filename)
+    #     with open(file_path, 'r') as f:
+    #         contents = json.load(f)
+
+    #     for content in contents:
+    #         sources = content['obscured_sources']
+    #         questions = content['questions']
+    #         for question, source in zip(questions.items(), sources.items()):
+    #             q = question[1]
+    #             s = source[1]
+    #             topk = dr.search(q, cutoff=10, return_docs=True)
+    #             search_results.append({
+    #                 "query": q,
+    #                 "topk": topk,
+    #                 "ground_truth": s
+    #             })
+    #     print(f"finished processing {filename}")
+    
+
+    all_questions = []
+    all_sources = []
+
     for filename in tqdm(os.listdir(directory)):
         file_path = os.path.join(directory, filename)
+        
         with open(file_path, 'r') as f:
             contents = json.load(f)
-
         for content in contents:
-            sources = content['obscured_sources']
             questions = content['questions']
+            sources = content['obscured_sources']
             for question, source in zip(questions.items(), sources.items()):
-                q = question[1]
-                s = source[1]
-                topk = dr.search(q, cutoff=10, return_docs=True)
-                search_results.append({
-                    "query": q,
-                    "topk": topk,
-                    "ground_truth": s
-                })
-        print(f"finished processing {filename}")
+                all_questions.append(question[1])
+                all_sources.append(source[1])
+    queries = []
 
-
-        # search_result = query_search(dr, contents)
-        # search_results.extend(search_result)
+    for question, source in zip(all_questions, all_sources):
+        queries.append({
+            "id": source,
+            "text": question
+        })
+    search_results = dr.msearch(
+                        queries=queries,
+                        cutoff=10,
+                        batch_size=32
+                    )
+    
 
     print("writing outputs")
     with open('../data_baselines/vanilla.json', 'w') as f:
         json.dump(search_results, f, indent=2)
 
-
-
-    # print(dr.search("This is a easy search", cutoff=10))
-    # print(dr.search("What is the tech industry's response to the recent immigration ban, and how are companies supporting affected employees?", cutoff=10))
-    # print(dr.search("What do recent regulatory actions signal about the future of cryptocurrency investments and the role of ICOs?", cutoff=10))
-
-    # print(dr.search("What are the key risks and red flags investors should be aware of when considering investments in companies involved in initial coin offerings (ICOs)?", cutoff=10))
 
     print("DONE!!!")
 
