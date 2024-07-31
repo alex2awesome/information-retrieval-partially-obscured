@@ -49,7 +49,7 @@ def main(args):
         index_name=args.index,
         device=args.device
     )
-
+    print(f"Using {args.device} as device")
     directory = '../data_preprocessed'
     search_results = []
     for filename in tqdm(os.listdir(directory)):
