@@ -7,6 +7,8 @@
 #SBATCH --mem=200GB
 #SBATCH --cpus-per-gpu=10
 #SBATCH --partition=gpu
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=liheng@berkeley.edu
 
 module load conda
 source conda activate rr

@@ -34,7 +34,8 @@ def main(args):
     included_doc = []
     test_dir = '../data_preprocessed/test'
     for filename in tqdm(os.listdir(test_dir)):
-        with open(filename, 'r') as f:
+        file_path = os.path.join(directory, filename)
+        with open(file_path, 'r', encoding='utf-8') as f:
             contents = json.load(f)
             for content in contents:
                 included_doc.extend(content['sources'].keys())
