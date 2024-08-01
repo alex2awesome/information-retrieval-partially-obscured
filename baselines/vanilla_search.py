@@ -6,7 +6,6 @@ from dense_retriever import MyDenseRetriever
 from tqdm.auto import tqdm
 from dr_search import search
 
-# Set environment variables
 HF_HOME = "/project/jonmay_231/spangher/huggingface_cache"
 os.environ['HF_TOKEN'] = "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"
 os.environ['HF_HOME'] = HF_HOME
@@ -46,7 +45,7 @@ def main(args):
     search_results = []
     for filename in tqdm(os.listdir(directory)):
         file_path = os.path.join(directory, filename)
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             contents = json.load(f)
 
         for content in contents:
