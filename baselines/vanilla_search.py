@@ -49,55 +49,58 @@ def main(args):
         index_name=args.index,
         device=args.device
     )
-    # print(f"Using {args.device} as device")
+    print(f"Using {args.device} as device")
+
+    included_doc = []
     directory = '../data_preprocessed'
-    # search_results = []
-    # for filename in tqdm(os.listdir(directory)):
-    #     file_path = os.path.join(directory, filename)
-    #     with open(file_path, 'r') as f:
-    #         contents = json.load(f)
-
-    #     for content in contents:
-    #         sources = content['obscured_sources']
-    #         questions = content['questions']
-    #         for question, source in zip(questions.items(), sources.items()):
-    #             q = question[1]
-    #             s = source[1]
-    #             topk = dr.search(q, cutoff=10, return_docs=True)
-    #             search_results.append({
-    #                 "query": q,
-    #                 "topk": topk,
-    #                 "ground_truth": s
-    #             })
-    #     print(f"finished processing {filename}")
-    
-
-    all_questions = []
-    all_sources = []
-
+    search_results = []
     for filename in tqdm(os.listdir(directory)):
         file_path = os.path.join(directory, filename)
-        
         with open(file_path, 'r') as f:
             contents = json.load(f)
-        for content in contents:
-            questions = content['questions']
-            sources = content['obscured_sources']
-            for question, source in zip(questions.items(), sources.items()):
-                all_questions.append(question[1])
-                all_sources.append(source[1])
-    queries = []
 
-    for question, source in zip(all_questions, all_sources):
-        queries.append({
-            "id": source,
-            "text": question
-        })
-    search_results = dr.msearch(
-                        queries=queries,
-                        cutoff=10,
-                        batch_size=32
-                    )
+        for content in contents:
+            sources = content['obscured_sources']
+            questions = content['questions']
+            for question, source in zip(questions.items(), sources.items()):
+                q = question[1]
+                s = source[1]
+                topk = dr.search(q, cutoff=10, return_docs=True)
+                search_results.append({
+                    "query": q,
+                    "topk": topk,
+                    "ground_truth": s
+                })
+        print(f"finished processing {filename}")
+    
+
+    # # msearch
+    # all_questions = []
+    # all_sources = []
+
+    # for filename in tqdm(os.listdir(directory)):
+    #     file_path = os.path.join(directory, filename)
+        
+    #     with open(file_path, 'r', encoding='utf-8') as f:
+    #         contents = json.load(f)
+    #     for content in contents:
+    #         questions = content['questions']
+    #         sources = content['obscured_sources']
+    #         for question, source in zip(questions.items(), sources.items()):
+    #             all_questions.append(question[1])
+    #             all_sources.append(source[1])
+    # queries = []
+
+    # for question, source in zip(all_questions, all_sources):
+    #     queries.append({
+    #         "id": source,
+    #         "text": question
+    #     })
+    # search_results = dr.msearch(
+    #                     queries=queries,
+    #                     cutoff=10,
+    #                     batch_size=32
+    #                 )
     
 
     print("writing outputs")
