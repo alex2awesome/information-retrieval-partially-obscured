@@ -90,7 +90,7 @@ def main(args):
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
     directory = '../data'
-    output_directory = '../data_augmented'
+    output_directory = '../source_augmented'
     count = 0
     for filename in os.listdir(directory):
         if 'obscured' not in filename:

@@ -13,34 +13,15 @@ os.environ['HF_HOME'] = HF_HOME
 cwd = os.path.dirname(os.path.abspath(__file__))
 os.environ['RETRIV_BASE_PATH'] = cwd
 
-def query_search(dr, contents):
-    search_results = []
-    for content in contents:
-        sources = content['sources']
-        questions = content['questions']
-        for question, source in zip(questions.items(), sources.items()):
-            q = question[1]
-            s = source[1]
-            print("question", type(q), q)
-            print("source", s)
-            topk = dr.search(question, cutoff=10)
-            search_results.append({
-                "query": q,
-                "topk": topk,
-                "ground_truth": s
-            })
-
-
-            '''
-            [{
-                "query": "...",
-                "topk": [{"id": source_name, "text": "...", "score": 0.1}, 
-                         {'id': 'Kirsten Gillibrand', 'text': 'Kirsten Gillibrand is a Senator.', 'score': 0.57928383}
-                         ],
-                "ground_truth": "..."
-            }, {...}, {...}]
-            '''
-    return search_results
+'''
+[{
+    "query": "...",
+    "topk": [{"id": source_name, "text": "...", "score": 0.1}, 
+                {'id': 'Kirsten Gillibrand', 'text': 'Kirsten Gillibrand is a Senator.', 'score': 0.57928383}
+                ],
+    "ground_truth": "..."
+}, {...}, {...}]
+'''
             
 
 
@@ -52,6 +33,15 @@ def main(args):
     print(f"Using {args.device} as device")
 
     included_doc = []
+    test_dir = '../data_preprocessed/test'
+    for filename in tqdm(os.listdir(test_dir)):
+        with open(filename, 'r') as f:
+            contents = json.load(f)
+            for content in contents:
+                included_doc.extend(content['sources'].keys())
+
+    print(f'test size: {len(included_doc)}')
+
     directory = '../data_preprocessed'
     search_results = []
     for filename in tqdm(os.listdir(directory)):
@@ -65,7 +55,7 @@ def main(args):
             for question, source in zip(questions.items(), sources.items()):
                 q = question[1]
                 s = source[1]
-                topk = dr.search(q, cutoff=10, return_docs=True)
+                topk = dr.search(q, include_id_list=included_doc, cutoff=10, return_docs=True)
                 search_results.append({
                     "query": q,
                     "topk": topk,
