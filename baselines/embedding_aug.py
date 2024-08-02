@@ -32,7 +32,11 @@ def main(args):
     for filename in tqdm(augmented_source_files):
         full_path = os.path.join(directory, filename)
         with open(full_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                print(f'{filename} is empty or not well formatted')
+                continue
             for article in data:
                 for id, augmentation in article['augmented_sources'].items():
                     new_source_embedding = {"id": id, "text": augmentation}
