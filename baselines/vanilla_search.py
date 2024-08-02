@@ -42,10 +42,9 @@ def main(args):
 
     print(f'test size: {len(included_doc)}')
 
-    directory = '../data_preprocessed'
     search_results = []
-    for filename in tqdm(os.listdir(directory)):
-        file_path = os.path.join(directory, filename)
+    for filename in tqdm(os.listdir(test_dir)):
+        file_path = os.path.join(test_dir, filename)
         with open(file_path, 'r', encoding='utf-8') as f:
             contents = json.load(f)
 
