@@ -1,6 +1,7 @@
 import os
 import shutil
 import random
+import json
 from tqdm.auto import tqdm
 
 def split_data(source_folder, train_folder, test_folder, test_ratio=0.2):
@@ -26,10 +27,30 @@ def split_data(source_folder, train_folder, test_folder, test_ratio=0.2):
     print(f"Copied {len(test_files)} files to {test_folder}")
     print(f"Copied {len(train_files)} files to {train_folder}")
 
+def generate_source_name(folder, setname):
+    included_doc = []
+    for filename in tqdm(os.listdir(folder)):
+        file_path = os.path.join(folder, filename)
+        with open(file_path, 'r', encoding='utf-8') as f:
+            contents = json.load(f)
+            for content in contents:
+                included_doc.extend(content['sources'].keys())
+    json_string = json.dumps(included_doc)
+    outputname = ''
+    if setname == 'test':
+        outputname = 'test_dataset.json'
+    else:
+        outputname = 'train_dataset.json'
+
+    with open(outputname, 'w') as f:
+        f.write(json_string)
 
 if __name__ == "__main__":
     source_folder = '../data_preprocessed'
     train_folder = '../data_preprocessed/train'
     test_folder = '../data_preprocessed/test'
 
-    split_data(source_folder, train_folder, test_folder)
+    # split_data(source_folder, train_folder, test_folder)
+    generate_source_name(test_folder, 'test')
+    generate_source_name(train_folder, 'train')
+
