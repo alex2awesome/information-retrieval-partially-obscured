@@ -34,7 +34,7 @@ def main(args):
         with open(full_path, 'r', encoding='utf-8') as f:
             try:
                 data = json.load(f)
-            except json.JSONDecodeError:
+            except json.decoder.JSONDecodeError:
                 print(f'{filename} is empty or not well formatted')
                 continue
             for article in data:
