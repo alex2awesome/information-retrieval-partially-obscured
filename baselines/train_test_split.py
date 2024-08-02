@@ -32,7 +32,11 @@ def generate_source_name(folder, setname):
     for filename in tqdm(os.listdir(folder)):
         file_path = os.path.join(folder, filename)
         with open(file_path, 'r', encoding='utf-8') as f:
-            contents = json.load(f)
+            try:
+                contents = json.load(f)
+            except json.decoder.JSONDecodeError:
+                print(f'{filename} is empty or not well formatted')
+                continue
             for content in contents:
                 included_doc.extend(content['sources'].keys())
     json_string = json.dumps(included_doc)
