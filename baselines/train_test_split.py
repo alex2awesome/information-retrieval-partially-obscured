@@ -49,12 +49,40 @@ def generate_source_name(folder, setname):
     with open(outputname, 'w') as f:
         f.write(json_string)
 
+def generate_test_set(folder, setname):
+    jsonfile = []
+    for filename in tqdm(os.listdir(folder)):
+        file_path = os.path.join(folder, filename)
+        with open(file_path, 'r', encoding='utf-8') as f:
+            try:
+                contents = json.load(f)
+            except json.decoder.JSONDecodeError:
+                print(f'{filename} is empty or not well formatted')
+                continue
+            for content in contents:
+                sources = content['obscured_sources']
+                questions = content['questions']
+                jsonfile.append({
+                    'obscured_sources': sources,
+                    'questions': questions
+                })
+    json_string = json.dumps(jsonfile)
+    outputname = ''
+    if setname == 'test':
+        outputname = 'test_set.json'
+    else:
+        outputname = 'train_set.json'
+    with open(outputname, 'w') as f:
+        f.write(json_string)
+
+
 if __name__ == "__main__":
     source_folder = '../data_preprocessed'
     train_folder = '../data_preprocessed/train'
     test_folder = '../data_preprocessed/test'
 
     # split_data(source_folder, train_folder, test_folder)
-    generate_source_name(test_folder, 'test')
-    generate_source_name(train_folder, 'train')
+    # generate_source_name(test_folder, 'test')
+    # generate_source_name(train_folder, 'train')
+    generate_test_set(test_folder, 'test')
 

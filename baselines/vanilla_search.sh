@@ -15,4 +15,4 @@ source conda activate rr
 conda env update -f env.yaml
 pip install -r requirements.txt
 
-python3 vanilla_search.py 
+python3 vanilla_search.py
