@@ -38,9 +38,14 @@ def main(args):
                 print(f'{filename} is empty or not well formatted')
                 continue
             for article in data:
-                for id, augmentation in article['augmented_sources'].items():
-                    new_source_embedding = {"id": id, "text": augmentation}
+                ids = article['obscured_sources'].keys()
+                for id in ids:
+                    new_source_embedding = {"id": id, "text": article['obscured_sources'][id] + "  " + article['augmented_sources'][id]}
                     collection.append(new_source_embedding)
+
+                # for id, augmentation in zip(article['augmented_sources'].items(), article['obscured_sources'].items()):
+                #     new_source_embedding = {"id": id, "text": augmentation}
+                #     collection.append(new_source_embedding)
 
     print("number of documents:", len(collection))
     print(collection[0])
