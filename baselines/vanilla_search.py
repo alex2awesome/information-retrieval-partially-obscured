@@ -42,25 +42,30 @@ def main(args):
 
     print(f'test size: {len(included_doc)}')
 
-    search_results = []
-    for filename in tqdm(os.listdir(test_dir)):
-        file_path = os.path.join(test_dir, filename)
-        with open(file_path, 'r', encoding='utf-8') as f:
-            contents = json.load(f)
+    test_path = './test_set.json'
+    with open(test_path, 'r') as f:
+        contents = json.load(f)
+    
 
-        for content in contents:
-            sources = content['obscured_sources']
-            questions = content['questions']
-            for question, source in zip(questions.items(), sources.items()):
-                q = question[1]
-                s = source[1]
-                topk = dr.search(q, include_id_list=included_doc, cutoff=10, return_docs=True)
-                search_results.append({
-                    "query": q,
-                    "topk": topk,
-                    "ground_truth": s
-                })
-        print(f"finished processing {filename}")
+    search_results = []
+    # for filename in tqdm(os.listdir(test_dir)):
+    #     file_path = os.path.join(test_dir, filename)
+    #     with open(file_path, 'r', encoding='utf-8') as f:
+    #         contents = json.load(f)
+
+    for content in contents:
+        sources = content['obscured_sources']
+        questions = content['questions']
+        for question, source in zip(questions.items(), sources.items()):
+            q = question[1]
+            s = source[1]
+            topk = dr.search(q, include_id_list=included_doc, cutoff=10, return_docs=True)
+            search_results.append({
+                "query": q,
+                "topk": topk,
+                "ground_truth": s
+            })
+    print(f"finished processing {filename}")
     
 
     # # msearch
