@@ -21,12 +21,12 @@ os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
 
 system_prefix_question = '''
 
-You are an AI assistant helping a journalist refine their query to find appropriate sources for a story. Given an initial query, your task is to generate a series of augmentations that progressively narrow down the types of sources that could answer the query, without referencing any specific individuals.
+You are an AI assistant helping a journalist refine their query to find appropriate sources for a story. Given an initial query, your task is to generate a series of augmentations that progressively narrow down the types of sources that could answer the query.
 
 Here's an example to guide you:
 
-Input: How is the Senate dealing with recent events, are they going to take a standard process or something different
-Output: People who know about this tend to be in leadership. They tend to have prior experience with directing processes in the Senate.
+Input: How is the Senate dealing with recent events, are they going to take a standard process or something different?
+Output: We want to find some Republicans in positions of power that might have information on legislation, Republicans in the Senate have more power to block legislation, some Republicans in positions of power are: Kevin McCarthy, Donald Trump, Mitch McConnell
 
 It's important to output only the augmentations separated by commas and nothing else. Follow this example and do the same analysis for the following source:
 
