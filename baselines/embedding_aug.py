@@ -40,7 +40,7 @@ def main(args):
             for article in data:
                 ids = article['obscured_sources'].keys()
                 for id in ids:
-                    new_source_embedding = {"id": id, "text": article['obscured_sources'][id] + "  " + article['augmented_sources'][id]}
+                    new_source_embedding = {"id": id, "text": article['obscured_sources'][id] + " " + article['augmented_sources'][id]}
                     collection.append(new_source_embedding)
 
                 # for id, augmentation in zip(article['augmented_sources'].items(), article['obscured_sources'].items()):
