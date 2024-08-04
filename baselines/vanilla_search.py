@@ -59,6 +59,7 @@ def main(args):
         for question, source in zip(questions.items(), sources.items()):
             q = question[1]
             s = source[1]
+            print(q)
             topk = dr.search(q, include_id_list=included_doc, cutoff=10, return_docs=True)
             search_results.append({
                 "query": q,
