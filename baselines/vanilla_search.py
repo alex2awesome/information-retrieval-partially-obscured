@@ -53,7 +53,7 @@ def main(args):
     #     with open(file_path, 'r', encoding='utf-8') as f:
     #         contents = json.load(f)
 
-    for content in contents:
+    for content in tqdm(contents):
         sources = content['obscured_sources']
         questions = content['questions']
         for question, source in zip(questions.items(), sources.items()):
