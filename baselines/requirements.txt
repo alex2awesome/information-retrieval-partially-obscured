@@ -5,4 +5,4 @@ pandas
 numpy
 huggingface_hub
 tqdm
-retriv
+git+https://github.com/alex2awesome/retriv.git
