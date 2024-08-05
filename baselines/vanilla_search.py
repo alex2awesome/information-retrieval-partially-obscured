@@ -27,7 +27,6 @@ os.environ['RETRIV_BASE_PATH'] = cwd
 def main(args):
     dr = DenseRetriever.load(
         index_name=args.index,
-        device=args.device,
         transformers_cache_dir=args.huggingface_cache_dir,
     )
     print(f"Using {args.device} as device")
