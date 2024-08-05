@@ -69,7 +69,7 @@ def main(args):
     all_sources = []
 
     
-    for content in contents:
+    for content in tqdm(contents):
         questions = content['questions']
         sources = content['obscured_sources']
         for question, source in zip(questions.items(), sources.items()):
