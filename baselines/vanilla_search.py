@@ -2,7 +2,7 @@ import argparse
 import os
 import json
 import torch
-from dense_retriever import MyDenseRetriever
+from retriv import DenseRetriever, Encoder, SparseRetriever
 from tqdm.auto import tqdm
 from dr_search import search
 
@@ -25,9 +25,10 @@ os.environ['RETRIV_BASE_PATH'] = cwd
 
 
 def main(args):
-    dr = MyDenseRetriever.load(
+    dr = DenseRetriever.load(
         index_name=args.index,
-        device=args.device
+        device=args.device,
+        transformers_cache_dir=args.huggingface_cache_dir,
     )
     print(f"Using {args.device} as device")
 
@@ -115,6 +116,11 @@ if __name__ == "__main__":
     parser.add_argument('--max_seq_length', type=int, default=None)
     parser.add_argument('--device', type=str, default='cuda' if torch.cuda.is_available() else 'cpu')
     parser.add_argument('--top_k', type=int, default=10, help='Number of top results to return for each query')
-    
+    parser.add_argument(
+        "--huggingface_cache_dir",
+        type=str,
+        default='/project/jonmay_231/spangher/huggingface_cache',
+        help="Path to the directory containing HuggingFace cache"
+    )
     args = parser.parse_args()
     main(args)
