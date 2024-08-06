@@ -61,12 +61,18 @@ def main(args):
             q = question[1]
             s = source[1]
             topk = dr.search(q, include_id_list=included_doc, cutoff=10, return_docs=True)
+
+            for result in topk:
+                result["score"] = str(result["score"])
+
             search_results.append({
                 "query": q,
                 "topk": topk,
                 "ground_truth": s
             })
     print(f"finished processing {filename}")
+
+    print(search_results[0])
     
 
     # # msearch
