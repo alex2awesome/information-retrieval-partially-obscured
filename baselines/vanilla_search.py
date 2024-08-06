@@ -99,7 +99,7 @@ def main(args):
     
 
     print("writing outputs")
-    with open('../data_baselines/vanilla.json', 'w') as f:
+    with open('../data_baseline/vanilla.json', 'w') as f:
         json.dump(search_results, f, indent=2)
 
 
