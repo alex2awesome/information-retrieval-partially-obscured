@@ -74,7 +74,6 @@ def main(args):
                 "topk": topk,
                 "ground_truth": s
             })
-    print(f"finished processing {filename}")
 
     print(search_results[0])
     
