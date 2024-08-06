@@ -49,7 +49,7 @@ def generate_source_name(folder, setname):
     with open(outputname, 'w') as f:
         f.write(json_string)
 
-def generate_test_set(folder, setname):
+def generate_set(folder, setname):
     jsonfile = []
     for filename in tqdm(os.listdir(folder)):
         file_path = os.path.join(folder, filename)
@@ -67,11 +67,7 @@ def generate_test_set(folder, setname):
                     'questions': questions
                 })
     json_string = json.dumps(jsonfile)
-    outputname = ''
-    if setname == 'test':
-        outputname = 'test_set.json'
-    else:
-        outputname = 'train_set.json'
+    outputname = f'{setname}_set.json'
     with open(outputname, 'w') as f:
         f.write(json_string)
 
@@ -84,5 +80,6 @@ if __name__ == "__main__":
     # split_data(source_folder, train_folder, test_folder)
     # generate_source_name(test_folder, 'test')
     # generate_source_name(train_folder, 'train')
-    generate_test_set(test_folder, 'test')
+    generate_set(test_folder, 'test')
+    generate_set(train_folder, 'train')
 

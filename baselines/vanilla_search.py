@@ -33,20 +33,24 @@ def main(args):
     print(f"Using {args.device} as device")
 
     included_doc = []
-    test_dir = '../data_preprocessed/test'
-    for filename in tqdm(os.listdir(test_dir)):
-        file_path = os.path.join(test_dir, filename)
-        with open(file_path, 'r', encoding='utf-8') as f:
-            contents = json.load(f)
-            for content in contents:
-                included_doc.extend(content['sources'].keys())
+    # test_dir = '../data_preprocessed/test'
+    # for filename in tqdm(os.listdir(test_dir)):
+    #     file_path = os.path.join(test_dir, filename)
+    #     with open(file_path, 'r', encoding='utf-8') as f:
+    #         contents = json.load(f)
+    #         for content in contents:
+    #             included_doc.extend(content['sources'].keys())
 
-    print(f'test size: {len(included_doc)}')
+    
 
     test_path = './test_set.json'
     with open(test_path, 'r') as f:
         contents = json.load(f)
     
+    for content in contents:
+        included_doc.extend(content['sources'].keys())
+
+    print(f'test size: {len(included_doc)}')
 
     search_results = []
     # for filename in tqdm(os.listdir(test_dir)):
