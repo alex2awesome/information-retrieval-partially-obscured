@@ -28,7 +28,7 @@ def main(args):
         contents = json.load(f)
     
     for content in contents:
-        included_doc.extend(content['sources'].keys())
+        included_doc.extend(content['obscured_sources'].keys())
 
     print(f'test size: {len(included_doc)}')
 
