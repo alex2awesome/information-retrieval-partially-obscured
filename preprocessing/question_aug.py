@@ -102,7 +102,12 @@ def main(args):
             continue
 
         with open(file_path, 'r', encoding='utf-8') as f:
-            contents = json.load(f)
+            try:
+                contents = json.load(f)
+            except json.decoder.JSONDecodeError:
+                print(f'{filename} is empty or not well formatted')
+                continue
+            # contents = json.load(f)
 
         processed_content = process_content(contents, tokenizer, model, sampling_params)
         
