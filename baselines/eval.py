@@ -50,6 +50,6 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type='../data_baseline/vanilla.json')
+    parser.add_argument("--path", type=str, default='../data_baseline/vanilla.json')
     args = parser.parse_args()
     main(args)
