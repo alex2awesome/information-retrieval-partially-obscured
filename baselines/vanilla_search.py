@@ -111,7 +111,7 @@ def main(args):
     
 
     print("writing outputs")
-    with open('../data_baseline/vanilla.json', 'w') as f:
+    with open(f'../data_baseline/vanilla_{k}.json', 'w') as f:
         json.dump(search_results, f, indent=2)
 
 
