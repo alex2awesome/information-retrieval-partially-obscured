@@ -17,7 +17,7 @@ def calculate_metrics(data):
 
 
     for item in data:
-        ground_truth = item['ground_truth']
+        ground_truth = item['ground_truth_source']
         top_k = item['topk']
         
         found = False
@@ -50,6 +50,6 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str)
+    parser.add_argument("--path", type='../data_baseline/vanilla.json')
     args = parser.parse_args()
     main(args)
