@@ -39,7 +39,8 @@ def main(args):
         questions = content['questions']
         for question, source in zip(questions.items(), sources.items()):
             q = question[1]
-            s = source[1]
+            source_name = source[0]
+            source_obscured = source[1]
             topk = dr.search(q, include_id_list=included_doc, cutoff=10, return_docs=True)
 
             for result in topk:
@@ -48,7 +49,8 @@ def main(args):
             search_results.append({
                 "query": q,
                 "topk": topk,
-                "ground_truth": s
+                "ground_truth_source": source_name,
+                "ground_truth_obscured_sources": source_obscured
             })
 
     print(search_results[0])
