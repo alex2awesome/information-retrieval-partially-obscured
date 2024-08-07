@@ -37,6 +37,25 @@ def calculate_metrics(data):
     
     return precision_value, recall_value, f1_value
 
+def dummy(data):
+    count = 0
+    total = 0
+    for item in data:
+        ground_truth = item['ground_truth_source']
+        top_k = item['topk']
+        
+        found = False
+        for result in top_k:
+            if result['text'] == ground_truth:
+                found = True
+                count += 1
+                break
+        total += 1
+    print("lalala", count/total)
+
+
+
+
 def main(args):
     path = args.path
     with open(path, 'r') as f:
@@ -46,6 +65,7 @@ def main(args):
     print("precision:", precision_value)
     print("recall:", recall_value)
     print("f1:", f1_value)
+    dummy(search_results)
 
 
 if __name__ == "__main__":
