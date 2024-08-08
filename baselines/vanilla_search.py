@@ -66,7 +66,8 @@ def main(args):
             q = question[1]
             source_name = source[0]
             source_obscured = source[1]
-            topk = dr.search(q, include_id_list=included_doc, cutoff=k, return_docs=True)
+            # topk = dr.search(q, include_id_list=included_doc, cutoff=k, return_docs=True)
+            topk = dr.search(q, cutoff=k, return_docs=True)
 
             for result in topk:
                 result["score"] = str(result["score"])
@@ -133,6 +134,6 @@ if __name__ == "__main__":
         default='/project/jonmay_231/spangher/huggingface_cache',
         help="Path to the directory containing HuggingFace cache"
     )
-    parser.add_argument('--cutoff', type=int, default=100)
+    parser.add_argument('--cutoff', type=int, default=10)
     args = parser.parse_args()
     main(args)
