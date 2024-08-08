@@ -100,6 +100,8 @@ def main(args):
         if exist_aug(output_path):
             print(f'{filename} is already augmented.')
             continue
+        if os.path.isdir(file_path):
+            continue
 
         with open(file_path, 'r', encoding='utf-8') as f:
             try:
