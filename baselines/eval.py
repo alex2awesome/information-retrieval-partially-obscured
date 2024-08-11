@@ -107,7 +107,7 @@ def main(args):
     # print("precision:", precision_value)
     # print("recall:", recall_value)
     # print("f1:", f1_value)
-    get_scores("../data_baseline/vanilla.json")
+    get_scores(path)
 
     # dummy(search_results)
 
