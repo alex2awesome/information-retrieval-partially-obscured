@@ -33,8 +33,9 @@ def main(args):
         with open(full_path, 'r') as f:
             data = json.load(f)
             for article in data:
+                url = article['article_url']
                 for id, summary in article['obscured_sources'].items():
-                    new_source_embedding = {"id": id, "text": id + ": " + summary.replace("OUTPUT", "")}
+                    new_source_embedding = {"id": id + "_" +  url, "text": id + ": " + summary.replace("OUTPUT", "")}
                     collection.append(new_source_embedding)
 
     print("number of documents:", len(collection))
