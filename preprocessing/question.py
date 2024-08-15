@@ -20,31 +20,11 @@ os.environ['HF_HOME'] = HF_HOME
 os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
 
 system_prefix_question = '''
-You are an AI assistant helping a journalist find appropriate sources for a story. Given the information provided by a source, your task is to create a very brief question that might elicit this source. The question should be specific enough to target the given information, but general enough that it doesn't reveal the source's identity.
-Follow these steps:
-1. Analyze the source information.
-2. Identify the key topics or expertise demonstrated by the source.
-3. Create a question requiring the source's specific knowledge or position to answer.
-4. Ensure the question doesn't directly reveal the source's identity.
-
-Here are some examples to guide you:
-Example 1:
-Input: The BBC Research & Development department provides technical information and insights about the halfRF system, a new technology developed by the BBC. They share details about the spectrum analyzer, transmitter antennas, transmit diversity, and the benefits of using MIMO (Multiple-Input Multiple-Output) signals.
-Output: How does the halfRF system created by the BBC work?
-Example 2:
-Input: CVS is the primary source providing information about their decision to remove certain drugs from their insurance coverage. They announce that over a dozen drugs will be dropped, and that equally effective products with lower costs will remain on the list.
-Output: Which insurance companies are removing drugs from their insurance coverage? Which drugs are insurance companies removing? Why are insurance companies removing drugs from their coverage?
-Example 3:
-Input: Mike Duggan, Detroit Mayor, provides context on why his city turned to data-driven government, highlighting its potential for transparency, accountability, and fact-based decision-making.
-Output: Why do cities become data-driven? What benefits does data-driven governance have?
-Example 4:
-Input: Susan Scrupski, Founder of Big Mountain Data (BMD), shares the organization's long-term ambition to establish a national open-source repository on repeat offender data and discusses its current efforts in tracking heating violations in New York City.
-Output: What kinds of projects are considered "data-driven city projects"? What types of issues can you address with data-driven governance?
-
-Now, process the following information and generate a similar question that would elicit this source without revealing their identity. Reply only with the brief, resulting question:
-
+You are an AI assistant for journalists. Output one sentence only based on the information provided by the overview below. State the preliminary question the overview answers, Please output this one question only. Incorporate the initial story lead and the reason why the journalist started investigating this topic.
 {source}
 '''
+
+
 
 def load_model(model):
     torch.cuda.memory_summary(device=None, abbreviated=False)
@@ -106,7 +86,7 @@ def main(args):
     sampling_params = SamplingParams(temperature=0.1, max_tokens=1024)
 
     directory = '../data'
-    output_directory = '../data_preprocessed'
+    output_directory = '../data_preprocessed_new'
     count = 0
     for filename in os.listdir(directory):
         if 'obscured' not in filename:
