@@ -14,5 +14,6 @@ module load conda
 source conda activate rr
 conda env update -f env.yaml
 pip install -r requirements.txt
+conda list
 
 python3 vanilla_msearch.py
