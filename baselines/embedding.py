@@ -35,7 +35,9 @@ def main(args):
             for article in data:
                 url = article['article_url']
                 for id, summary in article['obscured_sources'].items():
-                    new_source_embedding = {"id": id + "_" +  url, "text": id + ": " + summary.replace("OUTPUT", "")}
+                    summary = summary.replace("OUTPUT", "")
+                    summary = summary.replace("Here is the output", "")
+                    new_source_embedding = {"id": id + "_" +  url, "text": id + ": " + summary}
                     collection.append(new_source_embedding)
 
     print("number of documents:", len(collection))
