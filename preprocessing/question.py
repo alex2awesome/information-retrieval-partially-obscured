@@ -20,7 +20,16 @@ os.environ['HF_HOME'] = HF_HOME
 os.environ['VLLM_WORKER_MULTIPROC_METHOD'] = 'spawn'
 
 system_prefix_question = '''
-You are an AI assistant for journalists. Output one sentence only based on the information provided by the overview below. State the preliminary question the overview answers, Please output this one question only. Incorporate the initial story lead and the reason why the journalist started investigating this topic.
+You are an AI assistant for journalists. I will show you a blurb that summarizes the information that a source provided to a news article. Try to imagine a question that was originally asked to the source, by the journalist, that elicited this information.
+
+Try to ask the question about information the source provides to the overall narrative in the story — don't ask about information that is directly related to the source. 
+
+Don't mention the source's name or entities, but use descriptive terms to help me guess who the source is. For example, if the source is "Joe Biden", say "president of the U.S.".
+
+Ask the question at a high-level. Be concise. If the source is only providing information about their own biography, say "No information provided besides self-biography". 
+
+Here's the blurb:
+
 {source}
 '''
 
