@@ -1,4 +1,4 @@
-from dense_retriever import MyDenseRetriever
+from retriv import DenseRetriever
 import argparse
 import json
 import torch
@@ -14,7 +14,7 @@ os.environ['RETRIV_BASE_PATH'] = cwd
 
 def main(args):
 
-    dr = MyDenseRetriever(
+    dr = DenseRetriever(
             index_name="obscured_sources",
             model=args.embedding_model,
             normalize=True,
