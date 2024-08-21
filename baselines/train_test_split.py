@@ -73,11 +73,11 @@ def generate_set(folder, setname):
 
 
 if __name__ == "__main__":
-    source_folder = '../data_preprocessed'
-    train_folder = '../data_preprocessed/train'
-    test_folder = '../data_preprocessed/test'
+    source_folder = '../data_preprocessed_new'
+    train_folder = '../data_preprocessed_new/train'
+    test_folder = '../data_preprocessed_new/test'
 
-    # split_data(source_folder, train_folder, test_folder)
+    split_data(source_folder, train_folder, test_folder)
     # generate_source_name(test_folder, 'test')
     # generate_source_name(train_folder, 'train')
     generate_set(test_folder, 'test')
