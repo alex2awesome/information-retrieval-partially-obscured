@@ -51,7 +51,8 @@ def main(args):
     for content in contents:
         included_doc.extend(content['obscured_sources'].keys())
 
-    print(f'test size: {len(included_doc)}')
+    print(f'numher of sources: {len(included_doc)}')
+    print(included_doc[0])
 
     search_results = []
     # for filename in tqdm(os.listdir(test_dir)):
@@ -66,8 +67,8 @@ def main(args):
             q = question[1]
             source_name = source[0]
             source_obscured = source[1]
-            topk = dr.search(q, include_id_list=included_doc, cutoff=k, return_docs=True)
-            # topk = dr.search(q, cutoff=k, return_docs=True)
+            # topk = dr.search(q, include_id_list=included_doc, cutoff=k, return_docs=True)
+            topk = dr.search(q, cutoff=k, return_docs=True)
             
 
             for result in topk:
