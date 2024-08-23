@@ -16,6 +16,7 @@ def split_data(source_folder, train_folder, test_folder, test_ratio=0.2):
     os.makedirs(train_folder, exist_ok=True)
     os.makedirs(test_folder, exist_ok=True)
     
+    
     print("Copying files to test folder...")
     for file in tqdm(test_files, desc="Copying test files", unit="file"):
         shutil.copy(os.path.join(source_folder, file), os.path.join(test_folder, file))
@@ -67,7 +68,7 @@ def generate_set(folder, setname):
                         questions[source_name] = questions[source_name].split(":")[1]
                     questions[source_name].replace("Here's a possible question that could have elicited this information:", "")
                     questions[source_name].replace("Here's a possible question that could have elicited this response:", "")
-                    questions.replace("\n", "")
+                    questions[source_name].replace("\n", "")
                 jsonfile.append({
                     'obscured_sources': sources,
                     'questions': questions
