@@ -63,6 +63,7 @@ def generate_set(folder, setname):
                 sources = content['obscured_sources']
                 questions = content['questions']
                 questions.replace("Here's a possible question that could have elicited this information:", "")
+                questions.replace("\n", "")
                 jsonfile.append({
                     'obscured_sources': sources,
                     'questions': questions
