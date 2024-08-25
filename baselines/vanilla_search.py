@@ -48,14 +48,14 @@ def main(args):
     included_doc_path = './test_id.json'
     with open(test_path, 'r') as f:
         contents = json.load(f)
-    with open(included_doc_path, 'r') as f:
-        included_doc = json.load(f)
+
+    # with open(included_doc_path, 'r') as f:
+    #     included_doc = json.load(f)
     
-    # for content in contents:
-    #     included_doc.extend(content['obscured_sources'].keys())
+    for content in contents:
+        included_doc.extend(content['obscured_sources'].keys())
 
     print(f'numher of sources: {len(included_doc)}')
-    print(included_doc[0])
 
     search_results = []
     # for filename in tqdm(os.listdir(test_dir)):
