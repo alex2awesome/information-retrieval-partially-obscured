@@ -13,6 +13,11 @@ def split_data(source_folder, train_folder, test_folder, test_ratio=0.2):
     test_files = files[:test_size]
     train_files = files[test_size:]
     
+    # Check if train and test folders already exist and are not empty
+    if os.path.exists(train_folder) and os.path.exists(test_folder) and \
+       len(os.listdir(train_folder)) > 0 and len(os.listdir(test_folder)) > 0:
+        print("Train and test folders already exist and contain files. Skipping split.")
+        return
     os.makedirs(train_folder, exist_ok=True)
     os.makedirs(test_folder, exist_ok=True)
     
