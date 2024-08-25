@@ -42,13 +42,15 @@ def main(args):
         contents = json.load(f)
 
     with open(included_doc_path, 'r') as f:
-        included_doc = json.load(f)
+        included_doc_2 = json.load(f)
     
     for content in contents:
         included_doc.extend(content['obscured_sources'].keys())
 
     print(f'numher of sources: {len(included_doc)}')
     print(included_doc)
+    print(included_doc_2)
+    print(included_doc == included_doc_2)
 
 
     print("DONE!!!")
