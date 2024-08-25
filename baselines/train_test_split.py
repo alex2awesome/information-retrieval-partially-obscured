@@ -40,6 +40,7 @@ def generate_id(folder, setname):
                 continue
             for content in contents:
                 included_doc.extend(content['sources'].keys())
+
     json_string = json.dumps(included_doc)
     outputname = ''
     if setname == 'test':
@@ -71,7 +72,8 @@ def generate_set(folder, setname):
                     questions[source_name].replace("\n", "")
                 jsonfile.append({
                     'obscured_sources': sources,
-                    'questions': questions
+                    'questions': questions,
+                    'id': source_name + '_' + content['article_url']
                 })
     json_string = json.dumps(jsonfile)
     outputname = f'{setname}_set.json'
@@ -85,8 +87,8 @@ if __name__ == "__main__":
     test_folder = '../data_preprocessed_new/test'
 
     split_data(source_folder, train_folder, test_folder)
-    generate_id(test_folder, 'test')
-    generate_id(train_folder, 'train')
+    # generate_id(test_folder, 'test')
+    # generate_id(train_folder, 'train')
     generate_set(test_folder, 'test')
     generate_set(train_folder, 'train')
 
