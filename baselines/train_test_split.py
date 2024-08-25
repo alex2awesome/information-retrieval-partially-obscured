@@ -85,8 +85,9 @@ def generate_set(folder, setname):
     outputname = f'{setname}_set.json'
     with open(outputname, 'w') as f:
         f.write(json_string)
+
     with open(f'{setname}_id.json', 'w') as f:
-        f.write(ids)
+        json.dump(ids, f, indent=2)
 
 
 if __name__ == "__main__":
