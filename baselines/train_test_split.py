@@ -58,6 +58,7 @@ def generate_id(folder, setname):
 
 def generate_set(folder, setname):
     jsonfile = []
+    ids = []
     for filename in tqdm(os.listdir(folder)):
         file_path = os.path.join(folder, filename)
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -75,15 +76,17 @@ def generate_set(folder, setname):
                     questions[source_name].replace("Here's a possible question that could have elicited this information:", "")
                     questions[source_name].replace("Here's a possible question that could have elicited this response:", "")
                     questions[source_name].replace("\n", "")
+                    ids.append(source_name + '_' + content['article_url'])
                 jsonfile.append({
                     'obscured_sources': sources,
-                    'questions': questions,
-                    'id': source_name + '_' + content['article_url']
+                    'questions': questions
                 })
     json_string = json.dumps(jsonfile)
     outputname = f'{setname}_set.json'
     with open(outputname, 'w') as f:
         f.write(json_string)
+    with open(f'{setname}_id.json', 'w') as f:
+        f.write(ids)
 
 
 if __name__ == "__main__":
