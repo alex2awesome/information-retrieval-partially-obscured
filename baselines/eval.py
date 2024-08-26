@@ -107,7 +107,7 @@ def main(args):
     # print("precision:", precision_value)
     # print("recall:", recall_value)
     # print("f1:", f1_value)
-    dummy(path)
+    dummy(search_results)
 
     # dummy(search_results)
 
