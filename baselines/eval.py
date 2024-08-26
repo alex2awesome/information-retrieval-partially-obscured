@@ -102,7 +102,7 @@ def main(args):
     path = args.path
     with open(path, 'r') as f:
         search_results = json.load(f)
-    precision_value, recall_value, f1_value = calculate_metrics(search_results)
+    # precision_value, recall_value, f1_value = calculate_metrics(search_results)
 
     # print("precision:", precision_value)
     # print("recall:", recall_value)
