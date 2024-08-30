@@ -15,3 +15,6 @@
 sbatch obscure_v2_inner_runner.sh 0 20000 5
 sbatch obscure_v2_inner_runner.sh 100000 20000 5
 sbatch obscure_v2_inner_runner.sh 200000 20000 5
+
+
+

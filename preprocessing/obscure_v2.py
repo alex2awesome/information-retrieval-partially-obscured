@@ -146,12 +146,14 @@ if __name__ == "__main__":
         sentences_with_quotes = pd.read_csv(args.input_data_file, index_col=0)
 
     tokenizer, model = load_model(args.model)
+    print('Done loading model...')
     # store each article_url, annoted_sentences pair
     # hold the batches
     url_batches, message_batches = [], []
     # each batch
-    urls, info_messages = [], []
-    for url in sentences_with_quotes[args.id_col].unique():
+    info_messages = []
+    urls = []
+    for url in tqdm(sentences_with_quotes[args.id_col].unique().tolist(), desc="Making messages batches..."):
         one_article = (
             sentences_with_quotes
                 .loc[lambda df: df[args.id_col] == url]
@@ -187,8 +189,9 @@ if __name__ == "__main__":
         fname, fext = os.path.splitext(args.output_file)
         info_fname = f'{fname}__{start_idx}_{end_idx}{fext}'
         # generate the informational summaries
-        info_outputs = model.generate(info_messages, sampling_params)
-        write_to_file(info_fname, urls, info_outputs)
+        if not os.path.exists(info_fname):
+            info_outputs = model.generate(info_messages, sampling_params)
+            write_to_file(info_fname, urls, info_outputs)
         # update the indices
         start_idx = end_idx
         end_idx = start_idx + BATCH_SIZE
